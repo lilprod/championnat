@@ -23,4 +23,9 @@ class Journee extends Model
             ]
         ];
     }
+
+    public function evenements()
+    {
+        return $this->hasMany('App\Models\Evenement');
+    }
 }

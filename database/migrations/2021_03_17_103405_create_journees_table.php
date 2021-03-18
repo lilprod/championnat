@@ -19,6 +19,7 @@ class CreateJourneesTable extends Migration
             $table->string('code')->nullable();
             $table->string('slug')->nullable();
             $table->mediumText('description')->nullable();
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

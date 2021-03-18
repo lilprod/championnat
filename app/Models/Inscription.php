@@ -23,4 +23,24 @@ class Inscription extends Model
             ]
         ];
     }
+
+    public function evenement()
+    {
+        return $this->belongsTo('App\Models\Evenement');
+    }
+
+    public function ville()
+    {
+        return $this->belongsTo('App\Models\Ville');
+    }
+
+    public function journee()
+    {
+        return $this->belongsTo('App\Models\Journee');
+    }
+
+    public function stade()
+    {
+        return $this->belongsTo('App\Models\Srade');
+    }
 }

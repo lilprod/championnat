@@ -35,7 +35,7 @@
                     <div class="col-sm-6">
                     </div>
                     <div class="col-sm-6 text-end">
-                        <a href="{{ route('admin.journees.create') }}" class="btn btn-success btn-sm mb-3 btn-round" data-toggle="" data-target=""> <i class="fa fa-plus"></i>
+                        <a href="{{ route('admin.journees.create') }}" class="btn btn-primary btn-sm mb-3 btn-round" data-toggle="" data-target=""> <i class="fa fa-plus"></i>
                             Ajouter Journée</a>
                     </div>
                 </div>
@@ -45,17 +45,24 @@
                             <tr>
                                 <th>Libellé</th>
                                 <th>Code</th>
+                                <th>Status</th>
                                 <th style="width: 10%">Options</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($journees as $journee)
+                            @foreach ($journees as $i=>$journee)
                             <tr>
                                 <td>{{ $journee->title }}</td>
                                 <td>{{ $journee->code }}</td>
                                 <td>
+                                    <div class="form-check form-switch custom-switch-v1">
+                                        <input type="checkbox" data-id="{{$journee->id}}" id="status_{{$i}}" class="form-check-input input-primary check" id="status_{{$i}}" {{ $journee->status ? 'checked' : '' }}>
+                                       <!-- <label class="form-check-label" for="customswitchv1-1">primary</label>-->
+                                    </div>
+                                </td>
+                                <td>
                                     <a href="{{ route('admin.journees.edit', $journee->id) }}" class="btn btn-info btn-sm">Editer</a>
-                                    <button class="btn btn-danger btn-sm" data-toggle="modal" onclick="deleteData({{ $journee->id}})" data-target="#confirm" data-original-title="Supprimer">Supprimer</button>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirm" onclick="deleteData({{ $journee->id}})" data-original-title="Supprimer">Supprimer</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -69,10 +76,50 @@
 </div>
 <!-- [ Main Content ] end -->
 
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" id="deleteForm" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation de suppression</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <img src="{{asset('assets/admin/assets/images/sent.png')}}" alt="" width="50" height="46">
+                    <p>Voulez-vous supprimer cette journée?</p>
+                    
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
 
 @push('journee')
 <script>
+
+    $('.check').change(function() {
+        var status = $(this).prop('checked') == true ? 1 : 0; 
+        var journee_id = $(this).data('id'); 
+         
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '{!!URL::route('changeStatus')!!}',
+            data: {'status': status, 'journee_id': journee_id},
+            success: function(data){
+              console.log(data.success)
+            }
+        });
+    })
+
     function deleteData(id)
      {
          var id = id;

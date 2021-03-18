@@ -32,6 +32,8 @@ Route::post('save', 'Auth\RegisterController@save')->name('save');
 
 Route::get('/getStades', 'Auth\RegisterController@getStades')->name('getStades');
 
+Route::get('changeStatus', 'JourneeController@ChangeUserStatus')->name('changeStatus');
+
 Route::name('admin.')->group(function () {
 
     Route::group(['prefix' => 'admin'], function () {  
@@ -52,8 +54,18 @@ Route::name('admin.')->group(function () {
 
         Route::resource('evenements', 'EvenementController');
 
+        Route::resource('inscriptions', 'InscriptionController');
+        
+        Route::get('/inscription/media', 'EtatController@media')->name('inscription_media');
+
+        Route::get('/inscription/stade', 'EtatController@stade')->name('inscription_stade');
+
     });
 });
+
+Route::post('search/inscription/stade', 'EtatController@searchStade')->name('search_inscription_stade');
+
+Route::post('search/inscription/media', 'EtatController@searchMedia')->name('search_inscription_medie');
 
 Route::resource('profils', 'ProfilController');
 

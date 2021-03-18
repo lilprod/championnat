@@ -58,9 +58,25 @@
                                 <textarea cols="30" rows="4" class="form-control" name="description"></textarea>
                             </div>
                         </div>
-        
-                   
-        
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="display-block">Status</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="status" id="journee_active" value="1">
+                                    <label class="form-check-label" for="journee_active">
+                                    Active
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="status" id="journee_inactive" value="0" checked>
+                                    <label class="form-check-label" for="journee_inactive">
+                                    Inactive
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 

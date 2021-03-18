@@ -35,7 +35,7 @@
                     <div class="col-sm-6">
                     </div>
                     <div class="col-sm-6 text-end">
-                        <a href="{{ route('admin.villes.create') }}" class="btn btn-success btn-sm mb-3 btn-round" data-toggle="" data-target=""> <i class="fa fa-plus"></i>
+                        <a href="{{ route('admin.villes.create') }}" class="btn btn-primary btn-sm mb-3 btn-round" data-toggle="" data-target=""> <i class="fa fa-plus"></i>
                             Ajouter Ville</a>
                     </div>
                 </div>
@@ -52,8 +52,8 @@
                             <tr>
                                 <td>{{ $ville->title }}</td>
                                 <td>
-                                    <a href="{{ route('admin.villes.edit', $ville->id) }}" class="btn btn-info btn-sm">Editer</a>
-                                    <button class="btn btn-danger btn-sm" data-toggle="modal" onclick="deleteData({{ $ville->id}})" data-target="#confirm" data-original-title="Supprimer">Supprimer</button>
+                                    <a href="{{ route('admin.villes.edit', $ville->id) }}" class="btn btn-primary btn-sm">Editer</a>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirm" onclick="deleteData({{ $ville->id}})" data-original-title="Supprimer">Supprimer</button>
                                 </td>
                             </tr>
                             @endforeach

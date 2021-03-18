@@ -66,6 +66,17 @@ class JourneeController extends Controller
             ->with('success', 'Journée ajoutée avec succès.');
     }
 
+    public function changeUserStatus(Request $request)
+    {
+        $journee = Journee::findOrFail($request->journee_id);
+
+        $journee->status = $request->status;
+
+        $journee->save();
+  
+        return response()->json(['success'=>'User status change successfully.']);
+    }
+
     /**
      * Display the specified resource.
      *

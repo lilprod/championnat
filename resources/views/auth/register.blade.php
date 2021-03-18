@@ -13,9 +13,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="description" content="Request Manager Application."/>
-	<meta name="keywords" content="Request Manager Application"/>
-	<meta name="author" content="Request Manager"/>
+	<meta name="description" content="Championnat Manager Application."/>
+	<meta name="keywords" content="Championnat Manager Application"/>
+	<meta name="author" content="FTF"/>
 
 	<!-- Favicon icon -->
 	<link rel="icon" href="{{asset('assets/admin/assets/images/favicon.ico') }}" type="image/x-icon">
@@ -62,7 +62,7 @@
                     </p>
 
                     <p class="text-center text-secondary">
-                        Inscrivez-vous en un clique de souris.
+                        Inscrivez-vous en quelques cliques de souris.
                     </p>
 
                     <form method="POST" action="{{route('save')}}">
@@ -131,22 +131,23 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label>Téléphone <span class="text-danger">*</span></label>
-                            <input id="output" type="hidden" name="phone_number" value=""/>
-                            <input type="tel" id="phone" name="" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" required autocomplete="phone_number">
-        
-                            @error('phone_number')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                          </div>
+                            <div class="form-group">
+                                <label>Téléphone <span class="text-danger">*</span></label>
+                                <input id="output" type="hidden" name="phone_number" value=""/>
+                                <input type="tel" id="phone" name="" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" required autocomplete="phone_number">
+            
+                                @error('phone_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-
                             <div class="form-group checkbox">
                                 <label>
                                     <input type="checkbox" class="form-check-input input-primary" id="remember" OnClick="checkbox();"> J'ai lu et accepte les Termes & Conditions d'inscription
@@ -155,7 +156,6 @@
                         </div>
 
                         <div class="col-md-6">
-
                         </div>
                     </div>
 
@@ -165,7 +165,7 @@
                     </div>-->
 
                     <div class="form-group text-center">
-                        <input class="btn btn-success" id="submit" type="submit" value="Inscription" disabled>
+                        <input class="btn btn-primary btn-lg" id="submit" type="submit" value="Inscription" disabled>
                     </div>
                         
                     </form>
@@ -176,25 +176,32 @@
     </div>
 </div>
 
+<!--<nav class="navbar navbar-expand-md navbar-dark default top-nav-collapse">
+</nav>-->
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-white">
     <div class="container">
-    <a class="navbar-brand font-weight-bold text-dark" href="#">FTF</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-md-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link text-dark" href="#">Accueil <span class="sr-only">(current)</span></a>
-        </li>
-  
-        <!--<li class="nav-item">
-            <a class="nav-link text-dark" href="">Se connecter</a>
-        </li>-->
-      </ul>
+       <!-- <a class="navbar-brand font-weight-bold text-dark" href="#">FTF</a>-->
+        <a class="navbar-brand" href="#">
+            <img src="{{asset('assets/admin/assets/images/logo.png') }}" height="40px" alt="logo">
+        </a>
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-md-end" id="navbarNav">
+            <!--<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>-->
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link text-dark" href="#">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+        
+                <!--<li class="nav-item">
+                    <a class="nav-link text-dark" href="">Se connecter</a>
+                </li>-->
+            </ul>
+        </div>
     </div>
-    </div>
-  </nav>
+</nav>
 
 
 <!-- Required Js -->
@@ -227,9 +234,7 @@
                              $('select[name = "stade_id"]').append('<option value= "'+ value.id +'">' + value.title + ' </option>');
                            });
                          }
-                         
                         }
-
                     });
 
                 }else{
@@ -245,14 +250,15 @@
 </script>
 
 <script>
-    function checkbox(){
-           if(document.getElementById('remember').checked){
-               document.getElementById('submit').disabled = '';
-           }
-           else{
-               document.getElementById('submit').disabled = 'disabled';
-           }
-       }
+    function checkbox()
+    {
+        if(document.getElementById('remember').checked){
+            document.getElementById('submit').disabled = '';
+        }
+        else{
+            document.getElementById('submit').disabled = 'disabled';
+        }
+    }
  </script>
 <script src="{{asset('assets/admin/assets/js/plugins/bootstrap.min.js') }}"></script>
 <script src="{{asset('assets/admin/assets/js/plugins/feather.min.js') }}"></script>
@@ -302,19 +308,19 @@
       </script>
 
   
-<div class="pct-customizer">
+<!--<div class="pct-customizer">
     <div class="pct-c-btn">
        <button class="btn btn-light-danger" id="pct-toggler">
        <i data-feather="settings"></i>
        </button>
-       <!--<button class="btn btn-light-primary" data-bs-toggle="tooltip" title="Document" data-placement="left">
+       <button class="btn btn-light-primary" data-bs-toggle="tooltip" title="Document" data-placement="left">
        <i data-feather="book"></i>
        </button>
        <button class="btn btn-light-success" data-bs-toggle="tooltip" title="Buy Now" data-placement="left">
        <i data-feather="shopping-bag"></i>
        </button>
        <button class="btn btn-light-info" data-bs-toggle="tooltip" title="Support" data-placement="left">
-       <i data-feather="headphones"></i>-->
+       <i data-feather="headphones"></i>
        </button>
     </div>
     <div class="pct-c-content ">
@@ -359,7 +365,7 @@
           </div>
        </div>
     </div>
- </div>
+ </div>-->
  <script>
     $('#pct-toggler').on('click', function() {
         $('.pct-customizer').toggleClass('active');

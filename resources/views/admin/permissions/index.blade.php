@@ -35,8 +35,7 @@
                     <div class="col-sm-6">
                     </div>
                     <div class="col-sm-6 text-end">
-                        <!--<button class="btn btn-success btn-sm mb-3 btn-round" data-bs-toggle="modal" data-bs-target="#modal-report"><i class="feather icon-plus"></i> Ajouter Permission</button>-->
-                        <a href="{{ route('admin.permissions.create') }}" class="btn btn-success btn-sm mb-3 btn-round" data-toggle="" data-target=""> <i class="fa fa-plus"></i>
+                        <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary btn-sm mb-3 btn-round" data-toggle="" data-target=""> <i class="fa fa-plus"></i>
                             Ajouter Permission</a>
                     </div>
                 </div>
@@ -53,7 +52,7 @@
                             <tr>
                                 <td>{{ $permission->name }}</td>
                                 <td>
-                                    <a href="{{ route('admin.permissions.edit', $permission->id) }}" class="btn btn-info btn-sm">Editer</a>
+                                    <a href="{{ route('admin.permissions.edit', $permission->id) }}" class="btn btn-primary btn-sm">Editer</a>
                                     <button class="btn btn-danger btn-sm" data-toggle="modal" onclick="deleteData({{ $permission->id}})" data-target="#confirm" data-original-title="Supprimer">Supprimer</button>
                                 </td>
                             </tr>
@@ -67,6 +66,32 @@
     <!-- subscribe end -->
 </div>
 <!-- [ Main Content ] end -->
+
+
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" id="deleteForm" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation de suppression</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <img src="{{asset('assets/admin/assets/images/sent.png')}}" alt="" width="50" height="46">
+                    <p>Voulez-vous supprimer cette permission?</p>
+                    
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">

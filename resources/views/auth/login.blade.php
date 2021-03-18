@@ -13,9 +13,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="description" content="Request Manager Application."/>
-	<meta name="keywords" content="Request Manager Application"/>
-	<meta name="author" content="Request Manager"/>
+	<meta name="description" content="Championnat Manager Application."/>
+	<meta name="keywords" content="Championnat Manager Application"/>
+	<meta name="author" content="FTF"/>
 
 	<!-- Favicon icon -->
 	<link rel="icon" href="{{asset('assets/admin/assets/images/favicon.ico') }}" type="image/x-icon">
@@ -83,7 +83,7 @@
             </div>
             
 				<button type="submit" class="btn btn-block btn-primary mb-0">Connexion</button>
-				<div class="text-center">
+				{{--<div class="text-center">
 					<!--<div class="saprator my-4"><span>OR</span></div>
 					<button class="btn text-white bg-facebook mb-2 me-2  wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-facebook-f"></i></button>
 					<button class="btn text-white bg-googleplus mb-2 me-2 wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-google-plus-g"></i></button>
@@ -94,7 +94,7 @@
                   </p>
                @endif
 					<!--<p class="mb-0 text-muted">Don’t have an account? <a href="auth-signup-img-side.html" class="f-w-400">Signup</a></p>-->
-            </div>
+            </div>--}}
             
          </form>
 			</div>

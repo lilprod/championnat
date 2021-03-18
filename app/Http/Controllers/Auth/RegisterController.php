@@ -78,24 +78,34 @@ class RegisterController extends Controller
 
         $check_place = 0;
 
-        if($request->input('stade_id') != ''){
+        if($request->input('stade_id') != ' '){
 
-            $event = Evenement::where('stade_id', $request->input('stade_id'))->first();
+            $event = Evenement::where('stade_id', $request->input('stade_id'))
+                                ->first();
 
-            if($event){
+            if($event != null){
 
                 $check_place = $event->left_place;
 
                 if($check_place > 0){
                     
                     $inscrit = new Inscription();
+
                     $inscrit->nom_media = $request->input('nom_media');
+
                     $inscrit->email = $request->input('email');
+
                     $inscrit->phone_number = $request->input('phone_number');
+
                     $inscrit->type_media_id = $request->input('type_media_id');
+
                     $inscrit->ville_id = $request->input('ville_id');
 
                     $inscrit->stade_id = $request->input('stade_id');
+
+                    $inscrit->journee_id = $event->journee_id;
+
+                    $inscrit->evenement_id = $event->id;
 
                     $inscrit->save();
 
@@ -114,11 +124,11 @@ class RegisterController extends Controller
                     return back()->with('error', 'Le stade choisi est déjà plein! Veuillez choisir un autre svp.');
                 }
 
+            }else{
+                return back()->with('error', 'Il y a pas de match prévu pour ce stade!Veuillez choisir un autre svp');
             }
-            
-
         }
-             
+         
     }
 
     /**

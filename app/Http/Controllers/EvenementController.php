@@ -35,7 +35,8 @@ class EvenementController extends Controller
      */
     public function create()
     {
-        $journees = Journee::all(); //Get all journees
+        $journees = Journee::where('status', 1)
+                            ->get(); //Get all journees activated
 
         $stades = Stade::all(); //Get all stades
 
@@ -105,7 +106,8 @@ class EvenementController extends Controller
     {
         $evenement = Evenement::findOrFail($id); 
 
-        $journees = Journee::all(); //Get all journees
+        $journees = Journee::where('status', 1)
+                            ->get(); //Get all journees activated
 
         $stades = Stade::all(); //Get all stades
 

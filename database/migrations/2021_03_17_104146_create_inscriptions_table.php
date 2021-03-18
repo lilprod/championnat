@@ -23,6 +23,10 @@ class CreateInscriptionsTable extends Migration
             $table->string('slug')->nullable();
             $table->unsignedBigInteger('ville_id')->index()->nullable()->comment("");
             $table->foreign('ville_id')->references('id')->on('villes');
+            $table->unsignedBigInteger('evenement_id')->index()->nullable()->comment("");
+            $table->foreign('evenement_id')->references('id')->on('evenements');
+            $table->unsignedBigInteger('journee_id')->index()->nullable()->comment("");
+            $table->foreign('journee_id')->references('id')->on('journees');
             $table->string('email')->nullable();
             $table->string('phone_number')->nullable();
             $table->timestamps();

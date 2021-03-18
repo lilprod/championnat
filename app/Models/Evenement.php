@@ -33,4 +33,14 @@ class Evenement extends Model
     {
         return $this->belongsTo('App\Models\Stade');
     }
+
+    public function journee()
+    {
+        return $this->belongsTo('App\Models\Journee');
+    }
+
+    public function inscriptions()
+    {
+        return $this->hasMany('App\Models\Inscription');
+    }
 }

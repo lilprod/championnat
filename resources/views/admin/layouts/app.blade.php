@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
    <head>
-      <title>Allo Medic Assistance | Admin</title>
+      <title>Championnat Manager | Admin</title>
       <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 11]>
@@ -12,11 +12,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="description" content="Allo Medic Assistance Administration."/>
-      <meta name="keywords" content="Allo Medic Assistance, Admin"/>
-      <meta name="author" content="Allo Medic Assistance"/>
+      <meta name="description" content="Championnat Manager Administration."/>
+      <meta name="keywords" content="Championnat Manager, Admin"/>
+      <meta name="author" content="FTF"/>
       <!-- Favicon icon -->
-      <link rel="icon" href="{{asset('assets/admin/assets/images/favicon.svg') }}" type="image/x-icon">
+      <link rel="icon" href="{{asset('assets/admin/assets/images/favicon.ico') }}" type="image/x-icon">
       <!-- data tables css -->
       <link rel="stylesheet" href="{{asset('assets/admin/assets/css/plugins/dataTables.bootstrap4.min.css') }}">
       <link rel="stylesheet" href="{{asset('assets/admin/assets/fonts/cryptofont.css') }}">
@@ -159,6 +159,16 @@
                      </ul>
                   </li>
 
+                  <li class="pc-item pc-hasmenu">
+                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Inscriptions</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                     <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="{{route('admin.inscriptions.index')}}">Liste générale</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_stade')}}">Liste par stade</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_media')}}">Liste par Type Média</a></li>
+                        <!--<li class="pc-item"><a class="pc-link" href="#">Ajouter</a></li>-->
+                     </ul>
+                  </li>
+
                  @endcan
                 </ul>
             </div>
@@ -196,7 +206,7 @@
                      <img src="{{url('/storage/profile_images/'.auth()->user()->profile_picture ) }}" alt="user-image" class="user-avtar">
                      <span>
                      <span class="user-name">{{Auth()->user()->name}} {{Auth()->user()->firstname}}</span>
-                     <span class="user-desc">Administrator</span>
+                     <span class="user-desc">Administrateur</span>
                      </span>
                      </a>
                      <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
@@ -205,7 +215,7 @@
                         </div>-->
                         <a href="{{ route('profils.index') }}" class="dropdown-item">
                         <i class="material-icons-two-tone">account_circle</i>
-                        <span>Profile</span>
+                        <span>Profil</span>
                         </a>
 
                         <!--<a href="#" class="dropdown-item">
@@ -215,7 +225,7 @@
                         <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                         <i class="material-icons-two-tone">chrome_reader_mode</i>
-                        <span>Logout</span>
+                        <span>Déconnexion</span>
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -308,6 +318,14 @@
       <script src="{{asset('assets/admin/assets/js/plugins/jquery.dataTables.min.js') }}"></script>
       <script src="{{asset('assets/admin/assets/js/plugins/dataTables.bootstrap4.min.js') }}"></script>
       <script src="{{asset('assets/admin/assets/js/pages/data-basic-custom.js') }}"></script>
+      <script src="{{asset('assets/admin/assets/js/plugins/buttons.colVis.min.js') }}"></script>
+      <script src="{{asset('assets/admin/assets/js/plugins/buttons.print.min.js') }}"></script>
+      <script src="{{asset('assets/admin/assets/js/plugins/pdfmake.min.js') }}"></script>
+      <script src="{{asset('assets/admin/assets/js/plugins/jszip.min.js') }}"></script>
+      <script src="{{asset('assets/admin/assets/js/plugins/dataTables.buttons.min.js') }}"></script>
+      <script src="{{asset('assets/admin/assets/js/plugins/buttons.html5.min.js') }}"></script>
+      <script src="{{asset('assets/admin/assets/js/plugins/buttons.bootstrap4.min.js') }}"></script>
+      <script src="{{asset('assets/admin/assets/js/pages/data-export-custom.js') }}"></script>
 
       <script>
 
@@ -343,9 +361,9 @@
       @stack('type')
       @stack('ville')
       @stack('evenement')
-      @stack('structure')
-      @stack('speciality')
-      @stack('scripts')
+      @stack('inscription')
+      @stack('inscription_stade')
+      @stack('inscription_media')
       @stack('slug')
       <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> -->
       <!-- <script src="assets/js/plugins/clipboard.min.js"></script> -->

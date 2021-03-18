@@ -60,7 +60,23 @@
                             </div>
                         </div>
 
-                    
+                        <div class="col-12 col-md-12">
+                            <div class="form-group">
+                                <label class="display-block">Status</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="status" id="journee_active" value="1" {{  $journee->status == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="journee_active">
+                                    Active
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="status" id="journee_inactive" value="0" {{  $journee->status == 0 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="journee_inactive">
+                                    Inactive
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

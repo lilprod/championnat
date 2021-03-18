@@ -35,7 +35,7 @@
                     <div class="col-sm-6">
                     </div>
                     <div class="col-sm-6 text-end">
-                        <a href="{{ route('admin.administrators.create') }}" class="btn btn-success btn-sm mb-3 btn-round" data-toggle="" data-target=""> <i class="fa fa-plus"></i>
+                        <a href="{{ route('admin.administrators.create') }}" class="btn btn-primary btn-sm mb-3 btn-round" data-toggle="" data-target=""> <i class="fa fa-plus"></i>
                             Ajouter Admin
                         </a>
                     </div>
@@ -59,8 +59,8 @@
                                 <td>{{ $user->created_at->format('F d, Y h:ia') }}</td>
                                 <td>{{  $user->roles()->pluck('name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
                                 <td>
-                                    <a href="{{ route('admin.administrators.edit', $user->id) }}" class="btn btn-info btn-sm">Editer</a>
-                                    <button class="btn btn-danger btn-sm" data-toggle="modal" onclick="deleteData({{ $user->id}})" data-target="#confirm" data-original-title="Supprimer">Supprimer</button>
+                                    <a href="{{ route('admin.administrators.edit', $user->id) }}" class="btn btn-primary btn-sm">Editer</a>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirm" onclick="deleteData({{ $user->id}})" data-original-title="Supprimer">Supprimer</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -73,6 +73,31 @@
     <!-- subscribe end -->
 </div>
 <!-- [ Main Content ] end -->
+
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" id="deleteForm" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation de suppression</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <img src="{{asset('assets/admin/assets/images/sent.png')}}" alt="" width="50" height="46">
+                    <p>Voulez-vous supprimer cet administrateur?</p>
+                    
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 @endsection
 
