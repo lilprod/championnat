@@ -84,51 +84,6 @@
 
 @push('inscription')
 <script>
-
-    var _token = $('input[name="_token"]').val();
-
-    fetch_data();
-
-    function fetch_data(from_date = '', to_date = '', query = '')
-    {
-        $.ajax({
-            url:"{{ route('search_inscription_stade') }}",
-            method:"POST",
-            data:{ query:query, _token:_token},
-            dataType:"json",
-            success:function(data)
-            {
-                $('tbody').html(data.table_data);
-                //$('#total_records').text(data.total_data);
-                //$('#total_record').text(data.total_data);
-                //$('#total_amount').text(data.total_amount);
-                //$('#collector_name').text(data.collector_name);
-            }
-        })
-    }
-
-
-    $('#filter').click(function(){
-    var from_date = $('#from_date').val();
-    var to_date = $('#to_date').val();
-    var  query = $('#collector_id').val();
-    if(from_date != '' &&  to_date != '' &&  query != '')
-    {
-        fetch_data(query);
-    }
-    else
-    {
-        alert('Le nom du stade est obligatoires!');
-    }
-    });
-
-    /*$('#refresh').click(function(){
-        $('#from_date').val('');
-        $('#to_date').val('');
-        $('#collector').val('');
-        $('#collector_id').val('');
-        fetch_data();
-    });*/
     
     function deleteData(id)
     {

@@ -15,18 +15,61 @@ class EtatController extends Controller
     {
         $stades = Stade::all();
 
-        return view('admin.inscriptions.inscription_stade', compact('stades'));
+        $inscriptions = [];
+
+        return view('admin.inscriptions.inscription_stade', compact('stades', 'inscriptions'));
     }
 
     public function media()
     {
         $types = TypeMedia::all();
 
-        return view('admin.inscriptions.inscription_type_media', compact('types'));
+        $inscriptions = [];
+
+        return view('admin.inscriptions.inscription_type_media', compact('types', 'inscriptions'));
     }
 
     public function searchMedia(Request $request){
 
+    }
+
+    public function postStade(Request $request)
+    {
+        $this->validate($request, [
+            'stade_id' => 'required',
+            ],
+
+            $messages = [
+                'required' => 'The :attribute est un champ obliagatoire.',
+            ]
+        );
+
+        $inscriptions = Inscription::where('stade_id', $request->stade_id)
+                            ->get();
+
+        $stades = Stade::all();
+
+        return view('admin.inscriptions.inscription_stade', compact('stades', 'inscriptions'));
+
+    }
+
+    public function postMedia(Request $request)
+    {
+        $this->validate($request, [
+            'type_media_id' => 'required',
+            ],
+
+            $messages = [
+                'required' => 'The :attribute est un champ obliagatoire.',
+            ]
+        );
+
+        $inscriptions = Inscription::where('type_media_id', $request->type_media_id)
+                            ->get();
+
+        $types = TypeMedia::all();
+
+        return view('admin.inscriptions.inscription_type_media', compact('types', 'inscriptions'));
     }
 
     public function searchStade(Request $request)
