@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Inscription extends Model
+class Media extends Model
 {
     use HasFactory, Sluggable;
 
@@ -19,28 +19,18 @@ class Inscription extends Model
     {
         return [
             'slug' => [
-                'source' => 'nom_media'
+                'source' => 'name'
             ]
         ];
     }
 
-    public function evenement()
+    public function user()
     {
-        return $this->belongsTo('App\Models\Evenement');
+        return $this->belongsTo('App\Models\User');
     }
 
-    public function ville()
+    public function type()
     {
-        return $this->belongsTo('App\Models\Ville');
-    }
-
-    public function journee()
-    {
-        return $this->belongsTo('App\Models\Journee');
-    }
-
-    public function stade()
-    {
-        return $this->belongsTo('App\Models\Stade');
+        return $this->belongsTo('App\Models\TypeMedia', 'type_media_id');
     }
 }

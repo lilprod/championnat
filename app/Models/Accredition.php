@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TypeMedia extends Model
+class Accreditation extends Model
 {
     use HasFactory;
 
-    public function medias()
+    public function type()
     {
-        return $this->hasMany('App\Models\Media');
+        return $this->belongsTo('App\Models\TypeAccreditation', 'type_accredition_id');
     }
 }

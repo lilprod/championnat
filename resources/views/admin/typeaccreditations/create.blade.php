@@ -12,8 +12,8 @@
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="#!">Types Média</a></li>
-                    <li class="breadcrumb-item">Edition</li>
+                    <li class="breadcrumb-item"><a href="#!">Types Accréditations</a></li>
+                    <li class="breadcrumb-item">Ajout</li>
                 </ul>
             </div>
         </div>
@@ -30,40 +30,36 @@
 
         <div class="card">
             <div class="card-header">
-                <h5>Editer Type Média </h5>
+                <h5>Nouveau Type Accréditation </h5>
             </div>
 
-            <form method="POST" action="{{ route('admin.typemedias.update', $type->id) }}" enctype="multipart/form-data">
-                {{ csrf_field() }}
-                {{ method_field('PATCH') }}
+            <form method="POST" action="{{ route('admin.typeaccreditations.store') }}" enctype="multipart/form-data">
+                @csrf
 
                 <div class="card-body">
-
                     <div class="row form-row">
                         <div class="col-12 col-sm-12">
                             <div class="form-group">
-                                <label>Category </label>
-                                <input class="form-control" type="text" name="title" value="{{$type->title}}" id="title">
+                                <label>Libellé</label>
+                                <input type="text" class="form-control" name="title" id="title">
                             </div>
                         </div>
-                    
+
                         <div class="col-12 col-sm-12">
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea cols="30" rows="4" class="form-control" name="description">{{$type->description}}</textarea>
+                                <textarea cols="30" rows="4" class="form-control" name="description"></textarea>
                             </div>
                         </div>
-        
                     </div>
-
                 </div>
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary btn-block">Editer Type média</button>
+                    <button type="submit" class="btn btn-primary btn-block">Ajouter Type Accréditation</button>
                 </div>
 
             </form>
-        </div>
+    
     </div>
 </div>
 <!-- [ Main Content ] end -->

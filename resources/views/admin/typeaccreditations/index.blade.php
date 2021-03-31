@@ -8,11 +8,11 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Journées</h5>
+                    <h5 class="m-b-10">Types Accréditations</h5>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="#!">Journées</a></li>
+                    <li class="breadcrumb-item"><a href="#!">Types Accréditations</a></li>
                     <li class="breadcrumb-item">Liste</li>
                 </ul>
             </div>
@@ -28,41 +28,35 @@
         @include('inc.messages')
         <div class="card">
             <div class="card-header">
-                <h5> Liste des journées </h5>
+                <h5> Liste des types Accréditations </h5>
             </div>
             <div class="card-body">
                 <div class="row align-items-center m-l-0">
                     <div class="col-sm-6">
                     </div>
                     <div class="col-sm-6 text-end">
-                        <a href="{{ route('admin.journees.create') }}" class="btn btn-primary btn-sm mb-3 btn-round" data-toggle="" data-target=""> <i class="fa fa-plus"></i>
-                            Ajouter Journée</a>
+                        <a href="{{ route('admin.typemedias.create') }}" class="btn btn-primary btn-sm mb-3 btn-round" data-toggle="" data-target=""> <i class="fa fa-plus"></i>
+                            Ajouter Type Accréditation</a>
                     </div>
                 </div>
                 <div class="dt-responsive table-responsive">
                     <table id="simpletable" class="table table-striped table-bordered nowrap">
                         <thead>
                             <tr>
-                                <th>Libellé</th>
-                                <th>Code</th>
-                                <th>Status</th>
-                                <th style="width: 10%">Options</th>
+                                <th>N°</th>
+                                <th>Types Média</th>
+                                <th style="width: 10%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($journees as $i=>$journee)
+                            
+                            @foreach ($types as $key=> $type)
                             <tr>
-                                <td>{{ $journee->title }}</td>
-                                <td>{{ $journee->code }}</td>
+                                <td>{{$key+1}}</td>
+                                <td>{{$type->title}}</td>
                                 <td>
-                                    <div class="form-check form-switch custom-switch-v1">
-                                        <input type="checkbox" data-id="{{$journee->id}}" id="status_{{$i}}" class="form-check-input input-primary check" id="status_{{$i}}" {{ $journee->status ? 'checked' : '' }}>
-                                       <!-- <label class="form-check-label" for="customswitchv1-1">primary</label>-->
-                                    </div>
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.journees.edit', $journee->id) }}" class="btn btn-primary btn-sm">Editer</a>
-                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirm" onclick="deleteData({{ $journee->id}})" data-original-title="Supprimer">Supprimer</button>
+                                    <a href="{{ route('admin.typeaccreditations.edit', $type->id) }}" class="btn btn-primary btn-sm">Editer</a>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirm" onclick="deleteData({{ $type->id}})" data-original-title="Supprimer">Supprimer</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -76,6 +70,7 @@
 </div>
 <!-- [ Main Content ] end -->
 
+
 <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form action="" id="deleteForm" method="post">
@@ -88,7 +83,7 @@
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <img src="{{asset('assets/admin/assets/images/sent.png')}}" alt="" width="50" height="46">
-                    <p>Voulez-vous supprimer cette journée?</p>
+                    <p>Voulez-vous supprimer ce type d'accréditation?</p>
                     
                 </div>
 
@@ -100,30 +95,15 @@
         </form>
     </div>
 </div>
+
 @endsection
 
-@push('journee')
+@push('typeaccreditation')
 <script>
-
-    $('.check').change(function() {
-        var status = $(this).prop('checked') == true ? 1 : 0; 
-        var journee_id = $(this).data('id'); 
-         
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: '{!!URL::route('changeStatus')!!}',
-            data: {'status': status, 'journee_id': journee_id},
-            success: function(data){
-              console.log(data.success)
-            }
-        });
-    })
-
-    function deleteData(id)
+     function deleteData(id)
      {
          var id = id;
-         var url = '{{ route("admin.journees.destroy", ":id") }}';
+         var url = '{{ route("admin.typeaccreditations.destroy", ":id") }}';
          url = url.replace(':id', id);
          $("#deleteForm").attr('action', url);
      }

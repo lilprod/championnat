@@ -359,6 +359,7 @@
       @stack('journee')
       @stack('stade')
       @stack('type')
+      @stack('typeaccreditation')
       @stack('ville')
       @stack('evenement')
       @stack('inscription')

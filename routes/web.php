@@ -40,6 +40,8 @@ Route::name('admin.')->group(function () {
 
         Route::resource('typemedias', 'TypeMediaController');
 
+        Route::resource('typeaccreditations', 'TypeAccreditationController');
+
         Route::resource('villes', 'VilleController');
 
         Route::resource('journees', 'JourneeController');

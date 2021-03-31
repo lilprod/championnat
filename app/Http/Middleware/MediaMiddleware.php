@@ -3,10 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Models\User;
 
-class AdminMiddleware
+class MediaMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,9 @@ class AdminMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        
-        if (Auth::user()->hasPermissionTo('Admin Permissions')) { //If user has this //permission
+        if (Auth::user()->hasPermissionTo('Media Permissions')) { //If user has this //permission
             return $next($request);
         }
 

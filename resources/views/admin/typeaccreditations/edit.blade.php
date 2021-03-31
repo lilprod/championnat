@@ -12,7 +12,7 @@
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="#!">Types Média</a></li>
+                    <li class="breadcrumb-item"><a href="#!">Types Accréditations</a></li>
                     <li class="breadcrumb-item">Edition</li>
                 </ul>
             </div>
@@ -30,10 +30,10 @@
 
         <div class="card">
             <div class="card-header">
-                <h5>Editer Type Média </h5>
+                <h5>Editer Type Accréditation </h5>
             </div>
 
-            <form method="POST" action="{{ route('admin.typemedias.update', $type->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.typeaccreditations.update', $type->id) }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
 
@@ -42,7 +42,7 @@
                     <div class="row form-row">
                         <div class="col-12 col-sm-12">
                             <div class="form-group">
-                                <label>Category </label>
+                                <label>Libellé </label>
                                 <input class="form-control" type="text" name="title" value="{{$type->title}}" id="title">
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary btn-block">Editer Type média</button>
+                    <button type="submit" class="btn btn-primary btn-block">Editer Type Accréditation</button>
                 </div>
 
             </form>
