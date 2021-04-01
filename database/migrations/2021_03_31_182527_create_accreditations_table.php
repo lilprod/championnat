@@ -19,6 +19,10 @@ class CreateAccreditationsTable extends Migration
             $table->foreign('type_accreditation_id')->references('id')->on('type_accreditations');
             $table->unsignedBigInteger('stade_id')->index()->nullable()->comment("");
             $table->foreign('stade_id')->references('id')->on('stades');
+            $table->unsignedBigInteger('media_id')->index()->nullable()->comment("");
+            $table->foreign('media_id')->references('id')->on('media');
+            $table->unsignedBigInteger('user_id')->index()->nullable()->comment("");
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('nom_media')->nullable();
             $table->string('slug')->nullable();
             $table->unsignedBigInteger('ville_id')->index()->nullable()->comment("");
@@ -27,6 +31,8 @@ class CreateAccreditationsTable extends Migration
             $table->foreign('evenement_id')->references('id')->on('evenements');
             $table->unsignedBigInteger('journee_id')->index()->nullable()->comment("");
             $table->foreign('journee_id')->references('id')->on('journees');
+            $table->boolean('status')->default(0);
+            $table->date('date_match')->nullable();
             $table->timestamps();
         });
     }

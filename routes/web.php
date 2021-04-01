@@ -28,9 +28,12 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 // Registration Routes...
 Route::get('inscription', 'Auth\RegisterController@showRegistrationForm')->name('inscription');
 
+Route::post('register', 'Auth\RegisterController@register');
+
 Route::post('save', 'Auth\RegisterController@save')->name('save');
 
-Route::get('/getStades', 'Auth\RegisterController@getStades')->name('getStades');
+//Route::get('/getStades', 'Auth\RegisterController@getStades')->name('getStades');
+Route::get('/getStades', 'DashboardController@getStades')->name('getStades');
 
 Route::get('changeStatus', 'JourneeController@ChangeUserStatus')->name('changeStatus');
 
@@ -64,6 +67,19 @@ Route::name('admin.')->group(function () {
 
     });
 });
+
+Route::name('media.')->group(function () {
+
+    Route::group(['prefix' => 'media'], function () {  
+
+        Route::resource('accreditations', 'AccreditationController');
+
+        Route::get('/accreditation/pending', 'AccreditationController@pending')->name('accreditation_pending');
+
+        Route::get('/accreditation/archived', 'AccreditationController@archived')->name('accreditation_archived');
+
+    });
+});     
 
 Route::post('post/inscription/stade', 'EtatController@postStade')->name('post_inscription_stade');
 

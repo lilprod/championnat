@@ -65,14 +65,14 @@
                         Inscrivez-vous en quelques cliques de souris.
                     </p>
 
-                    <form method="POST" action="{{route('save')}}">
+                    <form method="POST" action="{{route('register')}}">
                         @csrf
                     
                     <div class="row">
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Type Média <span class="text-danger">*</span></label>
+                                <label>Type Média<span class="text-danger">*</span></label>
                                 <select name="type_media_id" id="type_media_id" class="form-control" required>
                                     @foreach ($types as $type)
                                         <option value="{{$type->id}}">{{$type->title}}</option>	
@@ -84,7 +84,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="nom_media" class="font-weight-bold">Nom du média</label>
+                                <label for="nom_media" class="font-weight-bold">Nom du média<span class="text-danger">*</span></label>
                                 <input placeholder="Nom" class="form-control @error('nom_media') is-invalid @enderror" name="nom_media" type="text" id="nom_media" value="{{ old('nom_media') }}" required autocomplete="nom_media">
                             
                                 @error('nom_media')
@@ -98,33 +98,9 @@
                     </div>
 
                     <div class="row">
-
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Ville de couverture<span class="text-danger">*</span></label>
-                                <select name="ville_id" id="ville" class="form-control" required>
-                                    <option value = "">--Sectionner votre ville--</option>
-                                    @foreach ($villes as $ville)
-                                        <option value="{{$ville->id}}">{{$ville->title}}</option>	
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Stade <span class="text-danger">*</span></label>
-                                <select name="stade_id" id="stade" class="form-control" required>
-                                    
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="email" class="font-weight-bold">Email</label>
+                                <label for="email" class="font-weight-bold">Email<span class="text-danger">*</span></label>
                                     <input placeholder="Email" class="form-control" required="" name="email" type="email" id="email">
                                 <small class="form-text text-muted">Veuillez renseigner une adresse email valide.</small>
                             </div>
@@ -132,7 +108,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Téléphone <span class="text-danger">*</span></label>
+                                <label>Téléphone<span class="text-danger">*</span></label>
                                 <input id="output" type="hidden" name="phone_number" value=""/>
                                 <input type="tel" id="phone" name="" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" required autocomplete="phone_number">
             
@@ -141,6 +117,30 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Mot de passe<span class="text-danger">*</span></label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+        
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Confirmation mot de passe<span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                
                             </div>
                         </div>
 
@@ -208,47 +208,11 @@
 <script src="{{asset('assets/admin/assets/js/vendor-all.min.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-    
-         $('#ville').on('change', function () {
-    
-             var ville_id = $(this).val();
-
-             if(ville_id){
-
-                 $.ajax({
-                    url: '{!!URL::route('getStades')!!}',
-                    type: 'GET',
-                    data : { 'id' : ville_id},
-                    dataType: 'json',
-    
-                    success:function(data){
-    
-                        if(data) {
-                            $('#stade').empty();
-    
-                            $('#stade').focus;
-    
-                            //$('#stade').append('<option value = "">--Sectionner stade--</option>');
-    
-                            $.each(data, function(key, value){
-                             $('select[name = "stade_id"]').append('<option value= "'+ value.id +'">' + value.title + ' </option>');
-                           });
-                         }
-                        }
-                    });
-
-                }else{
-                    $('#stade').empty();
-                }
-                   
-         });
-
          $('#nom_media').keyup(function(){
             $(this).val($(this).val().toUpperCase());
         });
     });
 </script>
-
 <script>
     function checkbox()
     {

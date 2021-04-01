@@ -93,6 +93,19 @@
 
                   <li class="pc-item"><a href="{{route('dashboard')}}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span></a></li>
 
+                  @can('Media Permissions')
+
+                  <li class="pc-item pc-hasmenu">
+                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">receipt</i></span><span class="pc-mtext">Mes accrédiations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                     <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="{{route('media.accreditations.index')}}">Accrédiations valides</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{route('media.accreditation_archived')}}">Accrédiations archivés</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{route('media.accreditations.create')}}">Faire une demande</a></li>
+                     </ul>
+                  </li>
+
+                  @endcan
+
                   @can('Admin Permissions')
                   
                   <li class="pc-item pc-hasmenu">
@@ -118,6 +131,14 @@
                        <li class="pc-item"><a class="pc-link" href="{{route('admin.administrators.create')}}">Ajouter</a></li>
                     </ul>
                  </li>
+
+                 <li class="pc-item pc-hasmenu">
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Type Accrédations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <ul class="pc-submenu">
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.typeaccreditations.index')}}">Liste</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.typeaccreditations.create')}}">Ajouter</a></li>
+                  </ul>
+               </li>
 
                  <li class="pc-item pc-hasmenu">
                      <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Type Média</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
@@ -206,7 +227,10 @@
                      <img src="{{url('/storage/profile_images/'.auth()->user()->profile_picture ) }}" alt="user-image" class="user-avtar">
                      <span>
                      <span class="user-name">{{Auth()->user()->name}} {{Auth()->user()->firstname}}</span>
-                     <span class="user-desc">Administrateur</span>
+                     @if(Auth()->user()->role_id ==  1)
+                      <span class="user-desc">Administrateur</span>
+                     @endif
+                     
                      </span>
                      </a>
                      <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
@@ -301,7 +325,7 @@
       </script>
 
       <!-- Ckeditor js -->
-      <script src="{{asset('assets/admin/assets/js/plugins/ckeditor.js') }}"></script>
+      <!--<script src="{{asset('assets/admin/assets/js/plugins/ckeditor.js') }}"></script>
       <script type="text/javascript">
          $(window).on('load', function() {
             $(function() {
@@ -311,7 +335,7 @@
                      });
             });
          });
-      </script>
+      </script>-->
 
 
       <!-- datatable Js -->
@@ -360,6 +384,9 @@
       @stack('stade')
       @stack('type')
       @stack('typeaccreditation')
+      @stack('add_accreditation')
+      @stack('edit_accreditation')
+      @stack('accreditation')
       @stack('ville')
       @stack('evenement')
       @stack('inscription')

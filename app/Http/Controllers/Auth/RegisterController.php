@@ -146,7 +146,16 @@ class RegisterController extends Controller
             'phone_number' => ['required', 'string', 'max:255', 'unique:users'],
             'type_media_id' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ],
+
+        $messages = [
+            'required' => 'Le champ :attribute est obligatoire.',
+            'min' => [
+                'string' => 'Le mot de passe doit contenir au moins :min caractères.',
+            ],
+        ]
+        
+        );
     }
 
     /**
@@ -163,16 +172,19 @@ class RegisterController extends Controller
             'name' => $data['nom_media'],
             'email' => $data['email'],
             'password' => $data['password'],
+            'role_id' => 2,
+            'profile_picture' => $fileNameToStore
         ]);
 
         $user->assignRole('Media');
 
         $media = new Media();
 
-        $media->name = $data['nom_media'];
+        $media->nom_media = $data['nom_media'];
         $media->email = $data['email'];
         $media->phone_number = $data['phone_number'];
         $media->type_media_id = $data['type_media_id'];
+        $media->profile_picture = $fileNameToStore;
         $media->user_id = $user->id;
 
         $media->save();

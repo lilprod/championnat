@@ -82,19 +82,20 @@
 					</div>
             </div>
             
-				<button type="submit" class="btn btn-block btn-primary mb-0">Connexion</button>
-				{{--<div class="text-center">
-					<!--<div class="saprator my-4"><span>OR</span></div>
-					<button class="btn text-white bg-facebook mb-2 me-2  wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-facebook-f"></i></button>
+            <button type="submit" class="btn btn-block btn-primary mb-0">Connexion</button>
+            
+				<div class="text-center">
+					<div class="saprator my-4"><span></span>
+					{{--<button class="btn text-white bg-facebook mb-2 me-2  wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-facebook-f"></i></button>
 					<button class="btn text-white bg-googleplus mb-2 me-2 wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-google-plus-g"></i></button>
 					<button class="btn text-white bg-twitter mb-2  wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-twitter"></i></button>-->
                @if (Route::has('password.request'))
                   <p class="mb-2 mt-4 text-muted">Mot de passe oublié?
                      <a href="{{ route('password.request') }}" class="f-w-400">Réinitialisé</a>
                   </p>
-               @endif
-					<!--<p class="mb-0 text-muted">Don’t have an account? <a href="auth-signup-img-side.html" class="f-w-400">Signup</a></p>-->
-            </div>--}}
+               @endif--}}
+					<p class="mb-0 text-muted">Je n'ai pas de compte? <a href="{{route('inscription')}}" class="f-w-400">Je m'inscrirs</a></p>
+            </div>
             
          </form>
 			</div>
@@ -111,7 +112,7 @@
 <script src="{{asset('assets/admin/assets/js/plugins/feather.min.js') }}"></script>
 <script src="{{asset('assets/admin/assets/js/pcoded.min.js') }}"></script>
 
-<div class="pct-customizer">
+{{--<div class="pct-customizer">
     <div class="pct-c-btn">
        <button class="btn btn-light-danger" id="pct-toggler">
        <i data-feather="settings"></i>
@@ -168,7 +169,7 @@
           </div>
        </div>
     </div>
- </div>
+ </div>--}}
  <script>
     $('#pct-toggler').on('click', function() {
         $('.pct-customizer').toggleClass('active');

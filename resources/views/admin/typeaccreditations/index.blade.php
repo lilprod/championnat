@@ -28,7 +28,7 @@
         @include('inc.messages')
         <div class="card">
             <div class="card-header">
-                <h5> Liste des types Accréditations </h5>
+                <h5> Liste des types accréditations </h5>
             </div>
             <div class="card-body">
                 <div class="row align-items-center m-l-0">

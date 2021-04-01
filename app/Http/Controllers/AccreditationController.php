@@ -4,10 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Accredition;
+use App\Models\TypeMedia;
+use App\Models\Ville;
+use App\Models\Stade;
+use App\Models\Evenement;
+use App\Models\Media;
+use App\Models\Accreditation;
+use App\Models\TypeAccreditation;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendUserMail;
+use App\Mail\SendAdminMail;
+
 
 class AccreditationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'media', 'isAdmin']); //supAdmin middleware lets only users with a //specific permission permission to access these resources
+    }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pending()
+    {
+        //Accreditations en attente
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +41,34 @@ class AccreditationController extends Controller
      */
     public function index()
     {
-        //
+        //Accreditations valides
+
+        $date = Carbon::now()->toDateString();
+
+        $accreditations = Accreditation::where('user_id', auth()->user()->id)
+                                        ->where('date_match', '>', $date)
+                                        ->get();
+
+        return view('accreditations.index', compact('accreditations'));
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function archived()
+    {
+        //Accreditations archivés
+
+        $date = Carbon::now()->toDateString();
+
+        $accreditations = Accreditation::where('user_id', auth()->user()->id)
+                                        ->where('date_match', '<', $date)
+                                        ->get();
+
+        return view('accreditations.archived', compact('accreditations'));
     }
 
     /**
@@ -25,7 +78,11 @@ class AccreditationController extends Controller
      */
     public function create()
     {
-        //
+        $villes = Ville::all();
+
+        $stades = Stade::all();
+
+        return view('accreditations.create', compact('villes', 'stades'));
     }
 
     /**
@@ -36,7 +93,74 @@ class AccreditationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'ville_id' => 'required',
+            'stade_id' => 'required',
+        ]);
+
+        $check_place = 0;
+
+        if($request->input('stade_id') != ' '){
+
+            $event = Evenement::where('stade_id', $request->input('stade_id'))
+                                ->first();
+
+            if($event != null){
+
+                $check_place = $event->left_place;
+
+                if($check_place > 0){
+                    
+                    $accreditation = new Accreditation();
+
+                    $media = Media::where('user_id', auth()->user()->id)->first();
+
+                    $accreditation->media_id = $media->id;
+
+                    $accreditation->type_accreditation_id = $request->input('type_accreditation_id');
+
+                    $accreditation->user_id = auth()->user()->id;
+
+                    $accreditation->nom_media = $media->nom_media;
+
+                    $accreditation->slug = $media->slug;
+
+                    $accreditation->ville_id = $request->input('ville_id');
+
+                    $accreditation->stade_id = $request->input('stade_id');
+
+                    $accreditation->journee_id = $event->journee_id;
+
+                    $accreditation->evenement_id = $event->id;
+
+                    $accreditation->date_match = $event->date_match;
+
+                    $accreditation->save();
+
+                    $event_final = Evenement::where('stade_id', $request->input('stade_id'))->first();
+
+                    $event_final->left_place = $event_final->left_place - 1 ;
+
+                    $event_final->save();
+
+                    Mail::to($media->email)->send(new SendUserMail($accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, $accreditation->evenement->date_match, $accreditation->evenement->title));
+
+                    Mail::to('pkossigan@gmail.com')->send(new SendAdminMail($media->type->title, $media->nom_media, $media->phone_number, $media->email, $accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, Carbon::parse($accreditation->evenement->date_match)->format('d/m/Y'), $accreditation->evenement->title, $accreditation->evenement->left_place, $accreditation->evenement->quota));
+
+                    //Redirect to the accredition view and display message
+                    return redirect()->route('media.accreditations.index')
+                    ->with('success', 'Accredition enregistrée avec succès.');
+
+                }else{
+
+                    return back()->with('error', 'Le stade choisi est déjà plein! Veuillez choisir un autre svp.');
+                }
+
+            }else{
+                return back()->with('error', 'Il y a pas de match prévu pour ce stade!Veuillez choisir un autre svp');
+            }
+        }
+
     }
 
     /**
@@ -47,7 +171,13 @@ class AccreditationController extends Controller
      */
     public function show($id)
     {
-        //
+        $villes = Ville::all();
+
+        $stades = Stade::all();
+
+        $accreditation = Accreditation::findOrFail($id);
+
+        return view('accreditations.show', compact('villes', 'stades', 'accreditation'));
     }
 
     /**
@@ -58,7 +188,13 @@ class AccreditationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $villes = Ville::all();
+
+        $stades = Stade::all();
+
+        $accreditation = Accreditation::findOrFail($id);
+
+        return view('accreditations.edit', compact('villes', 'stades', 'accreditation'));
     }
 
     /**
@@ -70,7 +206,11 @@ class AccreditationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $accreditation = Accreditation::findOrFail($id);
+
+        return redirect()->route('media.accreditation_pending')
+        ->with('success',
+         'Accredition éditée avec succès.');
     }
 
     /**
@@ -81,6 +221,12 @@ class AccreditationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $accreditation = Accreditation::findOrFail($id);
+
+        $accreditation->delete();
+
+        return redirect()->route('media.accreditations.index')
+            ->with('success',
+             'Accredition supprimée avec succès.');
     }
 }

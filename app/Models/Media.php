@@ -19,7 +19,7 @@ class Media extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'nom_media'
             ]
         ];
     }
