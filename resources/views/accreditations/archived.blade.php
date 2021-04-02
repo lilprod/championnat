@@ -43,6 +43,7 @@
                     <table id="simpletable" class="table table-striped table-bordered nowrap">
                         <thead>
                             <tr>
+                                <th>Type</th>
                                 <th>Date</th>
                                 <th>Journée</th>
                                 <th>Ville</th>
@@ -54,6 +55,7 @@
 
                             @foreach ($accreditations as $accreditation)
                             <tr>
+                                <td>{{ $accreditation->type->title }}</td>
                                 <td>{{ \Carbon\Carbon::parse($accreditation->evenement->date_match)->format('d/m/Y') }}</td>
                                 <td>{{ $accreditation->evenement->journee->code}}</td>
                                 <td>{{ $accreditation->evenement->stade->ville->title }}</td>

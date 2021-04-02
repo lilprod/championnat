@@ -59,7 +59,7 @@ Route::name('admin.')->group(function () {
 
         Route::resource('evenements', 'EvenementController');
 
-        Route::resource('inscriptions', 'InscriptionController');
+        Route::resource('accreditations', 'InscriptionController');
         
         Route::get('/inscription/media', 'EtatController@media')->name('inscription_media');
 
@@ -73,6 +73,8 @@ Route::name('media.')->group(function () {
     Route::group(['prefix' => 'media'], function () {  
 
         Route::resource('accreditations', 'AccreditationController');
+
+        Route::post('international/accreditation/save', 'AccreditationController@save')->name('international_accreditation_save');
 
         Route::get('/accreditation/pending', 'AccreditationController@pending')->name('accreditation_pending');
 

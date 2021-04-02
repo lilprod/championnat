@@ -14,6 +14,11 @@ class Accreditation extends Model
         return $this->belongsTo('App\Models\TypeAccreditation', 'type_accreditation_id');
     }
 
+    public function media()
+    {
+        return $this->belongsTo('App\Models\Media');
+    }
+
     public function evenement()
     {
         return $this->belongsTo('App\Models\Evenement');

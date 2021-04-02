@@ -181,9 +181,9 @@
                   </li>
 
                   <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Inscriptions</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Accréditations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                      <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.inscriptions.index')}}">Liste générale</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{route('admin.accreditations.index')}}">Liste générale</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_stade')}}">Liste par stade</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_media')}}">Liste par Type Média</a></li>
                         <!--<li class="pc-item"><a class="pc-link" href="#">Ajouter</a></li>-->

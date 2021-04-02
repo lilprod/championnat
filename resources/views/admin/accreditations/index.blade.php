@@ -8,11 +8,11 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Inscriptions</h5>
+                    <h5 class="m-b-10">Accréditations</h5>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="#!">Inscriptions</a></li>
+                    <li class="breadcrumb-item"><a href="#!">Accréditations</a></li>
                     <li class="breadcrumb-item">Liste</li>
                 </ul>
             </div>
@@ -28,7 +28,7 @@
         @include('inc.messages')
         <div class="card">
             <div class="card-header">
-                <h5> Liste des inscriptions </h5>
+                <h5> Liste des accréditations </h5>
             </div>
             <div class="card-body">
                 <!--<div class="row align-items-center m-l-0">
@@ -58,14 +58,14 @@
                             @foreach ($inscriptions as $inscription)
                             <tr>
                                 <td>{{ $inscription->nom_media }}</td>
-                                <td>{{ $inscription->email }}</td>
-                                <td>{{ $inscription->phone_number }}</td>
+                                <td>{{ $inscription->media->email }}</td>
+                                <td>{{ $inscription->media->phone_number }}</td>
                                 <td>{{ \Carbon\Carbon::parse($inscription->evenement->date_match)->format('d/m/Y') }}</td>
                                 <td>{{ $inscription->evenement->journee->code}}</td>
                                 <td>{{ $inscription->evenement->stade->ville->title }}</td>
                                 <td>{{ $inscription->evenement->stade->title }}</td>
                                 <td>
-                                    <a href="{{ route('admin.inscriptions.edit', $inscription->id) }}" class="btn btn-primary btn-sm">Editer</a>
+                                    <a href="{{ route('admin.accreditations.edit', $inscription->id) }}" class="btn btn-primary btn-sm">Editer</a>
                                     <button class="btn btn-danger btn-sm" data-ts-toggle="modal" onclick="deleteData({{ $inscription->id}})" data-ts-target="#confirm" data-original-title="Supprimer">Supprimer</button>
                                 </td>
                             </tr>
@@ -88,7 +88,7 @@
     function deleteData(id)
     {
         var id = id;
-        var url = '{{ route("admin.inscriptions.destroy", ":id") }}';
+        var url = '{{ route("admin.accreditations.destroy", ":id") }}';
         url = url.replace(':id', id);
         $("#deleteForm").attr('action', url);
     }

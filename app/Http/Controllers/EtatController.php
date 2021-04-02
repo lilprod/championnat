@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Stade;
 use App\Models\TypeMedia;
-use App\Models\Inscription;
+use App\Models\Accreditation;
 use Illuminate\Support\Facades\DB;
 
 class EtatController extends Controller
@@ -17,7 +17,7 @@ class EtatController extends Controller
 
         $inscriptions = [];
 
-        return view('admin.inscriptions.inscription_stade', compact('stades', 'inscriptions'));
+        return view('admin.accreditations.accreditation_stade', compact('stades', 'inscriptions'));
     }
 
     public function media()
@@ -26,7 +26,7 @@ class EtatController extends Controller
 
         $inscriptions = [];
 
-        return view('admin.inscriptions.inscription_type_media', compact('types', 'inscriptions'));
+        return view('admin.accreditations.accreditation_type_media', compact('types', 'inscriptions'));
     }
 
     public function searchMedia(Request $request){
@@ -44,12 +44,12 @@ class EtatController extends Controller
             ]
         );
 
-        $inscriptions = Inscription::where('stade_id', $request->stade_id)
+        $inscriptions = Accreditation::where('stade_id', $request->stade_id)
                             ->get();
 
         $stades = Stade::all();
 
-        return view('admin.inscriptions.inscription_stade', compact('stades', 'inscriptions'));
+        return view('admin.accreditations.accreditation_stade', compact('stades', 'inscriptions'));
 
     }
 
@@ -64,12 +64,12 @@ class EtatController extends Controller
             ]
         );
 
-        $inscriptions = Inscription::where('type_media_id', $request->type_media_id)
+        $inscriptions = Accreditation::where('type_media_id', $request->type_media_id)
                             ->get();
 
         $types = TypeMedia::all();
 
-        return view('admin.inscriptions.inscription_type_media', compact('types', 'inscriptions'));
+        return view('admin.accreditations.accreditation_type_media', compact('types', 'inscriptions'));
     }
 
     public function searchStade(Request $request)
@@ -83,11 +83,11 @@ class EtatController extends Controller
 
             if($query != '')
             {
-               /* $data = DB::table('inscriptions')
+               /* $data = DB::table('accreditations')
                             ->where('stade_id', '=', $query)
                             //->whereDate('date_collect', '=', $now)
                             ->get();*/
-                $data = Inscription::where('stade_id', $query)
+                $data = Accreditation::where('stade_id', $query)
                                     ->get();
             }
             /* else

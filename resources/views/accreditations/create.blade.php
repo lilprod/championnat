@@ -94,9 +94,9 @@
                                 <h5>Nouvelle demande d'accréditation </h5>
                             </div>
 
-                            <form method="POST" action="#" enctype="multipart/form-data">
+                            <form method="POST" action="{{route('media.international_accreditation_save')}}" enctype="multipart/form-data">
                                 @csrf
-                                    <div class="card-body">
+                                <div class="card-body">
                         
                                     <div class="row">
 
@@ -105,7 +105,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nom <span class="text-danger">*</span></label>
-                                                <input type="text" name="name" class="form-control  @error('name') is-invalid @enderror" placeholder="Nom" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                                <input type="text" name="name" class="form-control  @error('name') is-invalid @enderror" placeholder="Nom" id="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                     
                                                 @error('name')
                                                     <span class="invalid-feedback" role="alert">
@@ -143,7 +143,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Civilité <span class="text-danger">*</span></label><br>
+                                                <label>Genre <span class="text-danger">*</span></label><br>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M" checked>
                                                     <label class="form-check-label" for="inlineRadio1">Mr</label>
@@ -200,24 +200,61 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Copie Passeport <br>
-                                                <input type="file" name="passport_image" id="passport_image" class="form-control">
+                                                <label>Numéro du Passeport <span class="text-danger">*</span></label>
+                                                <input type="text" name="num_passport" class="form-control @error('num_passport') is-invalid @enderror" placeholder="Numéro du Passeport" value="{{ old('num_passport') }}" required autocomplete="profession">
+                                                
+                                                @error('num_passport')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            
+                                        </div>
+
+                                        
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Copie Passeport <span class="text-danger">*</span><br>
+                                                <input type="file" name="passport_image" id="passport_image" class="form-control" required>
+                                            </div>
+                                         </div>
+
+                                         <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Copie Carte de Presse<span class="text-danger">*</span> <br>
+                                                <input type="file" name="press_card_image" id="press_card_image" class="form-control" required>
+                                            </div>
+                                         </div>
+
+                                         <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Photo de Profil<span class="text-danger">*</span><br>
+                                                <input type="file" name="profile_picture" id="profile_picture" class="form-control" required>
                                             </div>
                                          </div>
 
                                          <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Copie Carte de Presse <br>
-                                                <input type="file" name="press_card_image" id="press_card_image" class="form-control">
+                                                <label>Ville de couverture<span class="text-danger">*</span></label>
+                                                <select name="ville_id" id="ville_inter" class="form-control" required>
+                                                    <option value = "">--Sectionner votre ville--</option>
+                                                    @foreach ($villes as $ville)
+                                                        <option value="{{$ville->id}}">{{$ville->title}}</option>	
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                         </div>
-
-                                         <div class="col-md-6">
+                                        </div>
+                
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Photo de Profil<br>
-                                                <input type="file" name="profile_picture" id="profile_picture" class="form-control">
+                                                <label>Stade <span class="text-danger">*</span></label>
+                                                <select name="stade_id" id="stade_inter" class="form-control" required>
+                                                    
+                                                </select>
                                             </div>
-                                         </div>
+                                        </div>
 
                                     </div> 
                                 </div>
@@ -278,7 +315,41 @@
                    
          });
 
-         $('#nom_media').keyup(function(){
+        $('#ville_inter').on('change', function () {
+    
+            var ville_inter_id = $(this).val();
+
+            if(ville_inter_id){
+
+                $.ajax({
+                url: '{!!URL::route('getStades')!!}',
+                type: 'GET',
+                data : { 'id' : ville_inter_id},
+                dataType: 'json',
+
+                success:function(data){
+
+                    if(data) {
+                        $('#stade_inter').empty();
+
+                        $('#stade_inter').focus;
+
+                        //$('#stade_inter').append('<option value = "">--Sectionner stade--</option>');
+
+                        $.each(data, function(key, value){
+                            $('select[name = "stade_id"]').append('<option value= "'+ value.id +'">' + value.title + ' </option>');
+                        });
+                        }
+                    }
+                });
+
+            }else{
+                $('#stade_inter').empty();
+            }
+                
+        });
+
+         $('#name').keyup(function(){
             $(this).val($(this).val().toUpperCase());
         });
     });

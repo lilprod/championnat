@@ -22,6 +22,7 @@ class CreateMediaTable extends Migration
             $table->string('nom_media')->nullable();
             $table->string('name')->nullable();
             $table->string('firstname')->nullable();
+            $table->date('birth_date')->nullable();
             $table->string('slug')->nullable();
             $table->string('email')->nullable();
             $table->string('phone_number')->nullable();

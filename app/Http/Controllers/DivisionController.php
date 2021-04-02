@@ -4,14 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Accreditation;
-
-class InscriptionController extends Controller
+class DivisionController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'isAdmin']); //supAdmin middleware lets only users with a //specific permission permission to access these resources
-    }
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +13,7 @@ class InscriptionController extends Controller
      */
     public function index()
     {
-        $inscriptions = Accreditation::all(); //Get all inscriptions
-
-        return view('admin.accreditations.index')->with('inscriptions', $inscriptions);
+        //
     }
 
     /**
