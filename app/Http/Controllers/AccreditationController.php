@@ -192,6 +192,8 @@ class AccreditationController extends Controller
 
                     $accreditation->type_accreditation_id = $request->input('type_accreditation_id');
 
+                    $accreditation->type_media_id = $media->type_media_id;
+
                     $accreditation->user_id = auth()->user()->id;
 
                     $accreditation->nom_media = $media->nom_media;

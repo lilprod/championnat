@@ -19888,6 +19888,7 @@ select.form-control[data-multiselectsplitter-firstselect-selector], select.form-
 .auth-wrapper .auth-side-form {
     position: relative;
     min-height: 100%;
+   /* background: #ecd929;*/
     background: #fff;
     display: inline-flex;
     align-items: center;

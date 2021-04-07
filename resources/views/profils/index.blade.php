@@ -49,7 +49,7 @@
                             <a href="mailto:demo@sample" class="float-end text-body">{{$user->email}}</a>
                         </li>
                         <li class="list-group-item">
-                            <span class="f-w-500"><i class="feather icon-phone-call m-r-10"></i>Phone</span>
+                            <span class="f-w-500"><i class="feather icon-phone-call m-r-10"></i>Téléphone</span>
                             <a href="#" class="float-end text-body">{{$user->phone_number}}</a>
                         </li>
                         <li class="list-group-item border-bottom-0">
@@ -321,6 +321,10 @@
                             @csrf
                             <div class="card-body">
                                 <div class="row">
+                                    
+
+                                    @if($user->role_id == 1 || $user->role_id == 2)
+
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-label">Nom <span class="text-danger">*</span></label>
@@ -328,7 +332,6 @@
                                         </div>
                                     </div>
 
-                                    @if($user->role_id == 1 || $user->role_id == 2)
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-label">Prénom(s) <span class="text-danger">*</span></label>
@@ -336,79 +339,57 @@
                                         </div>
                                     </div>
 
+                                    @endif
+
+                                    @if($user->role_id == 2)
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Nom de l'organe<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" value="{{$staff->nom_media}}" name="nom_media">
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="focus-label">Date de naissance <span class="text-danger">*</span></label>
-                                            <input class="form-control floating" type="date" value="{{$user->birth_date}}" name="birth_date">
+                                            <input class="form-control floating" type="date" value="{{$staff->birth_date}}" name="birth_date">
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="focus-label">Civilité <span class="text-danger">*</span></label>
                                             <select class="select form-control" name="gender">
-                                                <option value="M" {{  $user->gender == "M" ? 'selected' : '' }}>Mr</option>
-                                                <option value="F" {{  $user->gender == "F" ? 'selected' : '' }}>Mme</option>
+                                                <option value="M" {{  $staff->gender == "M" ? 'selected' : '' }}>Mr</option>
+                                                <option value="F" {{  $staff->gender == "F" ? 'selected' : '' }}>Mme</option>
                                             </select>
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Ville <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" value="{{$user->city}}" name="city">
+                                            <input type="text" class="form-control" value="{{$staff->city}}" name="city">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Profession <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" value="{{$staff->profession}}" name="profession">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Nationalité </label>
+                                            <input type="text" class="form-control" name="nationality" value="{{$staff->natinality}}">
                                         </div>
                                     </div>
                                     
                                     @endif
 
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="form-label">Code postal <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" value="{{$user->postal_code}}" name="postal_code">
-                                        </div>
-                                    </div>
-
-                                    
-
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label">Bio </label>
-                                            <textarea class="form-control" name="biography">{{$user->biography}}</textarea>
-                                        </div>
-                                    </div>
-                                    <!--<div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="form-label">Experience<span class="text-danger">*</span></label>
-                                            <select class="form-control">
-                                                <option>Startup</option>
-                                                <option>2 year</option>
-                                                <option>3 year</option>
-                                                <option selected>4 year</option>
-                                                <option>5 year</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label">Skills</label>
-                                            <select class="skill-mlt-select col-sm-12 " multiple="multiple">
-                                                <option selected>admin template</option>
-                                                <option>bootstrap</option>
-                                                <option>css</option>
-                                                <option>html5</option>
-                                                <option>css3</option>
-                                                <option>ionic</option>
-                                                <option>framework</option>
-                                                <option>javascript</option>
-                                                <option>jquery</option>
-                                                <option>scss</option>
-                                                <option>uidesigner</option>
-                                                <option>web designe</option>
-                                                <option>webflow</option>
-                                                <option>javascript</option>
-                                            </select>
-                                        </div>
-                                    </div>-->
                                 </div>
                             </div>
                             <!--<div class="card-header" <h5><i data-feather="share" class="icon-svg-primary wid-20"></i><span class="p-l-5">Social Information</span></h5>

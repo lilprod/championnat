@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MedicalStaff;
-use App\Models\HealthInstitution;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
@@ -30,15 +29,9 @@ class ProfilController extends Controller
 
         if($user->role_id == 2){
 
-            $staff = MedicalStaff::where('user_id', auth()->user()->id)->first();
+            $staff = Media::where('user_id', auth()->user()->id)->first();
 
             return view('profils.index', compact('staff', 'user'));
-
-        }elseif($user->role_id == 3){
-
-            $institustion = HealthInstitution::where('user_id', auth()->user()->id)->first();
-
-            return view('profils.index', compact('institustion', 'user'));
 
         }
 
@@ -116,7 +109,7 @@ class ProfilController extends Controller
 
         if($user->role_id == 2){
 
-            $staff = MedicalStaff::where('user_id', $user->id)->first();
+            $staff = Media::where('user_id', $user->id)->first();
             $user->name = $name;
             $user->firstname = $firstname;
             $user->email = $email;
@@ -131,32 +124,16 @@ class ProfilController extends Controller
             $staff->email = $email;
             $staff->address = $address;
             $staff->phone_number = $phone_number;
+            $staff->gender = $request->input('gender');
+            $staff->birth_date = $request->input('birth_date');
+            $staff->nationality = $request->input('nationality');
+            $staff->profession = $request->input('profession');
             if ($request->hasfile('profile_picture')) {
                 $staff->profile_picture = $fileNameToStore;
             }
             $user->save();
             $staff->save();
-        }else if($user->role_id == 3){
-
-            $institustion = HealthInstitution::where('user_id', $user->id)->first();
-            $user->name = $name;
-            $user->email = $email;
-            $user->address = $address;
-            $user->phone_number = $phone_number;
-            if ($request->hasfile('profile_picture')) {
-                $user->profile_picture = $fileNameToStore;
-            }
-
-            $institustion->name = $name;
-            $institustion->email = $email;
-            $institustion->address = $address;
-            $institustion->phone_number = $phone_number;
-            if ($request->hasfile('profile_picture')) {
-                $institustion->profile_picture = $fileNameToStore;
-            }
-            $user->save();
-            $institustion->save();
-        } else{
+         } else{
 
             $user->name = $name;
             $user->firstname = $firstname;

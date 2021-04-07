@@ -96,15 +96,37 @@
                @endif--}}
 					<p class="mb-0 text-muted">Je n'ai pas de compte? <a href="{{route('inscription')}}" class="f-w-400">Je m'inscrirs</a></p>
             </div>
+				</div>
             
          </form>
 			</div>
       </div>
-      
-
-	</div>
 </div>
 <!-- [ signin-img ] end -->
+
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-white">
+   <div class="container">
+      <!-- <a class="navbar-brand font-weight-bold text-dark" href="#">FTF</a>-->
+       <a class="navbar-brand" href="#">
+           <img src="{{asset('assets/admin/assets/images/logo.png') }}" height="40px" alt="logo">
+       </a>
+       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse justify-content-md-end" id="navbarNav">
+           <!--<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           </ul>-->
+           <ul class="navbar-nav">
+               <li class="nav-item active">
+                   <a class="nav-link text-dark" href="#">Accueil <span class="sr-only">(current)</span></a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link text-dark" href="{{route('inscription')}}">Inscription</a>
+               </li>
+           </ul>
+      </div>
+   </div>
+</nav>
 
 <!-- Required Js -->
 <script src="{{asset('assets/admin/assets/js/vendor-all.min.js') }}"></script>

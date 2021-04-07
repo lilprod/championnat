@@ -21,6 +21,8 @@ class CreateAccreditationsTable extends Migration
             $table->foreign('stade_id')->references('id')->on('stades');
             $table->unsignedBigInteger('media_id')->index()->nullable()->comment("");
             $table->foreign('media_id')->references('id')->on('media');
+            $table->unsignedBigInteger('type_media_id')->index()->nullable()->comment("");
+            $table->foreign('type_media_id')->references('id')->on('type_media');
             $table->unsignedBigInteger('user_id')->index()->nullable()->comment("");
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('nom_media')->nullable();

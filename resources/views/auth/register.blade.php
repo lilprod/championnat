@@ -167,6 +167,12 @@
                     <div class="form-group text-center">
                         <input class="btn btn-primary btn-lg" id="submit" type="submit" value="Inscription" disabled>
                     </div>
+
+                    <div class="text-center">
+                        <div class="saprator my-4"><span></span>
+                            <p class="mb-0 text-muted">J'ai un compte? <a href="{{route('login')}}" class="f-w-400">Se connecter</a></p>
+                        </div>
+                    </div>
                         
                     </form>
 
@@ -195,9 +201,9 @@
                     <a class="nav-link text-dark" href="#">Accueil <span class="sr-only">(current)</span></a>
                 </li>
         
-                <!--<li class="nav-item">
-                    <a class="nav-link text-dark" href="">Se connecter</a>
-                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{route('login')}}">Se connecter</a>
+                </li>
             </ul>
         </div>
     </div>
