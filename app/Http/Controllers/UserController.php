@@ -112,7 +112,7 @@ class UserController extends Controller
             }
         }
         //Redirect to the admin.users.index view and display message
-        return redirect()->route('administrators.users.index')
+        return redirect()->route('admin.administrators.index')
             ->with('success',
              'Administrateur ajouté avec succès.');
     }
@@ -204,9 +204,8 @@ class UserController extends Controller
             $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
         }
 
-        return redirect()->route('administrators.users.index')
-            ->with('success',
-             'Administrateur edité avec succès.');
+        return redirect()->route('admin.administrators.index')
+            ->with('success', 'Administrateur edité avec succès.');
     }
 
     /**
@@ -224,7 +223,7 @@ class UserController extends Controller
         }
         $user->delete();
 
-        return redirect()->route('administrators.users.index')
+        return redirect()->route('admin.administrators.index')
             ->with('success',
              'Administrateur supprimé avec succès.');
     }

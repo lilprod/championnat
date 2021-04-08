@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\TypeMedia;
@@ -135,6 +136,38 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
+     * @param array $data
+     *
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    /*protected function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+
+        return $this->registered($request, $user) ?: redirect('/verify?email='.$request->email.'&phone_number='.$request->phone_number);
+    }*/
+
+    public static function sendCode($email, $phone_number)
+    {
+        $code = rand(1111, 9999);
+        Mail::to($email)->send(new SendMailable($code));
+
+        /*$basic = new \Nexmo\Client\Credentials\Basic('81de9211', '2uK4uXgfutl3LgtC');
+        $client = new \Nexmo\Client($basic);
+
+        $message = $client->message()->send([
+            'to' => $phone_number,
+            'from' => '14373703901',
+            'text' => 'Code de Vérification: '.$code,
+        ]);*/
+
+        return $code;
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
@@ -146,6 +179,7 @@ class RegisterController extends Controller
             'phone_number' => ['required', 'string', 'max:255', 'unique:users'],
             'type_media_id' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            //'g-recaptcha-response' => ['required','captcha'],
         ],
 
         $messages = [
@@ -153,6 +187,8 @@ class RegisterController extends Controller
             'min' => [
                 'string' => 'Le mot de passe doit contenir au moins :min caractères.',
             ],
+            'g-recaptcha-response.required' => 'Veuillez confirmer que vous n\'êtes pas un robot avant l\'inscription',
+            'g-recaptcha-response.captcha' => 'Vous n\'avez pas réussi la confirmation que vous n\'êtes pas un robot, Veuillez réessayer svp.',
         ]
         
         );
@@ -188,6 +224,11 @@ class RegisterController extends Controller
         $media->user_id = $user->id;
 
         $media->save();
+
+        /*if ($user) {
+            $user->code = $this::sendCode($user->email, $user->phone_number);
+            $user->save();
+        }*/
 
         return $user;
     }

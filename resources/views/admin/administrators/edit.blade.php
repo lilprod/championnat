@@ -38,7 +38,7 @@
                     <div class="col-md-6 pr-0">
                         <div class="form-group">
                             {{ Form::label('name', 'Nom') }}
-                            {{ Form::text('name', null, array('class' => 'form-control form-control-uppercase')) }}
+                            {{ Form::text('name', null, array('class' => 'form-control form-control-uppercase', 'id' => 'name')) }}
                           </div>
                       </div>
     

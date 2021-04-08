@@ -146,16 +146,39 @@
 
                     </div>
 
+                    {{--<div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {!! RecaptchaV3::initJs() !!}
+                                {!! RecaptchaV3::field('register') !!}
+                                @error('g-recaptcha-response')
+                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>--}}
+
+
+                     {{--<div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <!--<label for="captcha">Captcha</label>-->
+                                {!! NoCaptcha::renderJs() !!}
+                                {!! NoCaptcha::display() !!}
+                                @error('g-recaptcha-response')
+                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>--}}
+
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group checkbox">
                                 <label>
                                     <input type="checkbox" class="form-check-input input-primary" id="remember" OnClick="checkbox();"> J'ai lu et accepte les Termes & Conditions d'inscription
                                 </label>
                             </div>
-                        </div>
-
-                        <div class="col-md-6">
                         </div>
                     </div>
 
@@ -187,7 +210,7 @@
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-white">
     <div class="container">
        <!-- <a class="navbar-brand font-weight-bold text-dark" href="#">FTF</a>-->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="https://www.ftftogo.com">
             <img src="{{asset('assets/admin/assets/images/logo.png') }}" height="40px" alt="logo">
         </a>
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -198,7 +221,7 @@
             </ul>-->
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link text-dark" href="#">Accueil <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-dark" href="https://www.ftftogo.com">Accueil <span class="sr-only">(current)</span></a>
                 </li>
         
                 <li class="nav-item">

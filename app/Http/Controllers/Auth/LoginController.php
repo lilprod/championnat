@@ -6,6 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 class LoginController extends Controller
 {
     /*
@@ -37,4 +44,36 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    /*public function login(Request $request)
+    {
+        $this->validateLogin($request);
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        //-----------------------------
+
+        if ($this->guard()->validate($this->credentials($request))) {
+            $user = $this->guard()->getLastAttempted();
+            if ($user->is_activated && $this->attemptLogin($request)) {
+                return $this->sendLoginResponse($request);
+            } else {
+                $this->incrementLoginAttempts($request);
+                $user->code = SendCode::sendCode($user->email, $user->phone_number);
+                if ($user->save()) {
+                    return redirect('/verify?email='.$user->email.'&phone_number='.$user->phone_number);
+                }
+            }
+        }
+
+        //--------------------------
+
+        $this->IncrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
+    }*/
 }

@@ -37,9 +37,16 @@ Route::get('/getStades', 'DashboardController@getStades')->name('getStades');
 
 Route::get('changeStatus', 'JourneeController@ChangeUserStatus')->name('changeStatus');
 
+//Account Verification
+Route::get('/verify', 'VerifyController@getVerify')->name('getVerify');
+
+Route::post('/verify', 'VerifyController@postVerify')->name('verify');
+
 Route::name('admin.')->group(function () {
 
     Route::group(['prefix' => 'admin'], function () {  
+
+        Route::resource('medias', 'MediaController');
 
         Route::resource('typemedias', 'TypeMediaController');
 

@@ -93,6 +93,8 @@
 
                   <li class="pc-item"><a href="{{route('dashboard')}}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span></a></li>
 
+                  <li class="pc-item"><a href="https://www.ftftogo.com" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">arrow_back</i></span><span class="pc-mtext">Retour au site</span></a></li>
+
                   @can('Media Permissions')
 
                   <li class="pc-item pc-hasmenu">
@@ -109,10 +111,10 @@
                   @can('Admin Permissions')
                   
                   <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">https</i></span><span class="pc-mtext">Permissions</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">vpn_key</i></span><span class="pc-mtext">Permissions</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                      <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.permissions.index')}}">Permissions</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.permissions.create')}}">Ajouter</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{route('admin.permissions.create')}}" target="_blank">Ajouter</a></li>
                      </ul>
                   </li>
 
@@ -131,9 +133,17 @@
                        <li class="pc-item"><a class="pc-link" href="{{route('admin.administrators.create')}}">Ajouter</a></li>
                     </ul>
                  </li>
+                 
+                 <li class="pc-item pc-hasmenu">
+                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">play_arrow</i></span><span class="pc-mtext">Média</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                     <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="{{route('admin.medias.index')}}">Média</a></li>
+                        <!--<li class="pc-item"><a class="pc-link" href="{{route('admin.medias.create')}}">Ajouter</a></li>-->
+                     </ul>
+                  </li>
 
                  <li class="pc-item pc-hasmenu">
-                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Type Accrédations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">topic</i></span><span class="pc-mtext">Type Accrédations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                   <ul class="pc-submenu">
                      <li class="pc-item"><a class="pc-link" href="{{route('admin.typeaccreditations.index')}}">Liste</a></li>
                      <li class="pc-item"><a class="pc-link" href="{{route('admin.typeaccreditations.create')}}">Ajouter</a></li>
@@ -141,7 +151,7 @@
                </li>
 
                  <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Type Média</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">play_circle_filled</i></span><span class="pc-mtext">Type Média</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                      <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.typemedias.index')}}">Liste</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.typemedias.create')}}">Ajouter</a></li>
@@ -149,7 +159,7 @@
                   </li>
 
                   <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Villes</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">place</i></span><span class="pc-mtext">Villes</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                      <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.villes.index')}}">Liste</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.villes.create')}}">Ajouter</a></li>
@@ -157,7 +167,7 @@
                   </li>
 
                   <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Journées</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">star_border</i></span><span class="pc-mtext">Journées</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                      <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.journees.index')}}">Liste</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.journees.create')}}">Ajouter</a></li>
@@ -165,7 +175,7 @@
                   </li>
 
                   <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Stades</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">outlined_flag</i></span><span class="pc-mtext">Stades</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                      <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.stades.index')}}">Liste</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.stades.create')}}">Ajouter</a></li>
@@ -173,7 +183,7 @@
                   </li>
 
                   <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Evènements</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">sports_baseball</i></span><span class="pc-mtext">Matchs</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                      <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.evenements.index')}}">Liste</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.evenements.create')}}">Ajouter</a></li>
@@ -181,7 +191,7 @@
                   </li>
 
                   <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Accréditations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">content_copy</i></span><span class="pc-mtext">Accréditations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                      <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.accreditations.index')}}">Liste générale</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_stade')}}">Liste par stade</a></li>
@@ -277,6 +287,28 @@
      
       <!-- Required Js -->
       <script src="{{asset('assets/admin/assets/js/vendor-all.min.js') }}"></script>
+
+      <script type="text/javascript">
+            $('#name').keyup(function(){
+               $(this).val($(this).val().toUpperCase());
+            });
+
+            $('#firstname').keyup(function() 
+            {
+               var str = $('#firstname').val();
+               
+               
+               var spart = str.split(" ");
+               for ( var i = 0; i < spart.length; i++ )
+               {
+                  var j = spart[i].charAt(0).toUpperCase();
+                  spart[i] = j + spart[i].substr(1);
+               }
+
+            $('#firstname').val(spart.join(" "));
+            
+            });
+      </script>
       <script src="{{asset('assets/admin/assets/js/plugins/bootstrap.min.js') }}"></script>
       <script src="{{asset('assets/admin/assets/js/plugins/feather.min.js') }}"></script>
       <script src="{{asset('assets/admin/assets/js/pcoded.min.js') }}"></script>
@@ -378,6 +410,7 @@
      </script>
 
       @stack('role')
+      @stack('media')
       @stack('permission')
       @stack('admin')
       @stack('journee')
