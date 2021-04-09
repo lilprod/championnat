@@ -93,7 +93,7 @@
 
                   <li class="pc-item"><a href="{{route('dashboard')}}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span></a></li>
 
-                  <li class="pc-item"><a href="https://www.ftftogo.com" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">arrow_back</i></span><span class="pc-mtext">Retour au site</span></a></li>
+                  <li class="pc-item"><a href="https://www.ftftogo.com" class="pc-link " target="_blank"><span class="pc-micon"><i class="material-icons-two-tone">arrow_back</i></span><span class="pc-mtext">Retour au site</span></a></li>
 
                   @can('Media Permissions')
 
@@ -108,28 +108,57 @@
 
                   @endcan
 
-                  @can('Admin Permissions')
-                  
-                  <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">vpn_key</i></span><span class="pc-mtext">Permissions</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.permissions.index')}}">Permissions</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.permissions.create')}}" target="_blank">Ajouter</a></li>
-                     </ul>
-                  </li>
+                  @can('Super Permissions')
 
-                  <li class="pc-item pc-hasmenu">
-                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">lock</i></span><span class="pc-mtext">Rôles</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                    <ul class="pc-submenu">
-                       <li class="pc-item"><a class="pc-link" href="{{route('admin.roles.index')}}">Rôles</a></li>
-                       <li class="pc-item"><a class="pc-link" href="{{route('admin.roles.create')}}">Ajouter</a></li>
-                    </ul>
-                 </li>
+                     <li class="pc-item pc-hasmenu">
+                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">vpn_key</i></span><span class="pc-mtext">Permissions</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <ul class="pc-submenu">
+                           <li class="pc-item"><a class="pc-link" href="{{route('admin.permissions.index')}}">Liste</a></li>
+                           <li class="pc-item"><a class="pc-link" href="{{route('admin.permissions.create')}}">Ajouter</a></li>
+                        </ul>
+                     </li>
+
+                     <li class="pc-item pc-hasmenu">
+                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">lock</i></span><span class="pc-mtext">Rôles</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <ul class="pc-submenu">
+                           <li class="pc-item"><a class="pc-link" href="{{route('admin.roles.index')}}">Liste</a></li>
+                           <li class="pc-item"><a class="pc-link" href="{{route('admin.roles.create')}}">Ajouter</a></li>
+                        </ul>
+                     </li>
+
+                     <li class="pc-item pc-hasmenu">
+                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">people</i></span><span class="pc-mtext">Utilisateurs</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <ul class="pc-submenu">
+                           <li class="pc-item"><a class="pc-link" href="{{route('super.users.index')}}">Liste</a></li>
+                           <li class="pc-item"><a class="pc-link" href="{{route('super.users.create')}}">Ajouter</a></li>
+                        </ul>
+                     </li>
+                  @endcan
+
+               @can('Admin Permissions')
+
+               <li class="pc-item pc-hasmenu">
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">sports_baseball</i></span><span class="pc-mtext">Matchs</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <ul class="pc-submenu">
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.evenements.index')}}">Liste</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.evenements.create')}}">Ajouter</a></li>
+                  </ul>
+               </li>
+
+               <li class="pc-item pc-hasmenu">
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">content_copy</i></span><span class="pc-mtext">Accréditations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <ul class="pc-submenu">
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.accreditations.index')}}">Liste générale</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_stade')}}">Liste par stade</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_media')}}">Liste par Type Média</a></li>
+                     <!--<li class="pc-item"><a class="pc-link" href="#">Ajouter</a></li>-->
+                  </ul>
+               </li>
                  
                  <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">account_circle</i></span><span class="pc-mtext">Administrateurs</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                       <li class="pc-item"><a class="pc-link" href="{{route('admin.administrators.index')}}">Administrateurs</a></li>
+                       <li class="pc-item"><a class="pc-link" href="{{route('admin.administrators.index')}}">Liste</a></li>
                        <li class="pc-item"><a class="pc-link" href="{{route('admin.administrators.create')}}">Ajouter</a></li>
                     </ul>
                  </li>
@@ -137,7 +166,7 @@
                  <li class="pc-item pc-hasmenu">
                      <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">play_arrow</i></span><span class="pc-mtext">Média</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                      <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.medias.index')}}">Média</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{route('admin.medias.index')}}">Liste</a></li>
                         <!--<li class="pc-item"><a class="pc-link" href="{{route('admin.medias.create')}}">Ajouter</a></li>-->
                      </ul>
                   </li>
@@ -181,25 +210,6 @@
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.stades.create')}}">Ajouter</a></li>
                      </ul>
                   </li>
-
-                  <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">sports_baseball</i></span><span class="pc-mtext">Matchs</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.evenements.index')}}">Liste</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.evenements.create')}}">Ajouter</a></li>
-                     </ul>
-                  </li>
-
-                  <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">content_copy</i></span><span class="pc-mtext">Accréditations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.accreditations.index')}}">Liste générale</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_stade')}}">Liste par stade</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_media')}}">Liste par Type Média</a></li>
-                        <!--<li class="pc-item"><a class="pc-link" href="#">Ajouter</a></li>-->
-                     </ul>
-                  </li>
-
                  @endcan
                 </ul>
             </div>
@@ -239,6 +249,14 @@
                      <span class="user-name">{{Auth()->user()->name}} {{Auth()->user()->firstname}}</span>
                      @if(Auth()->user()->role_id ==  1)
                       <span class="user-desc">Administrateur</span>
+                     @endif
+
+                     @if(Auth()->user()->role_id ==  3)
+                      <span class="user-desc">Super Admin</span>
+                     @endif
+
+                     @if(Auth()->user()->role_id ==  2)
+                      <span class="user-desc">Bienvenue!</span>
                      @endif
                      
                      </span>
@@ -324,14 +342,14 @@
                // dropdownContainer: document.body,
                // excludeCountries: ["us"],
                // formatOnDisplay: false,
-               // geoIpLookup: function(callback) {
-               //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-               //     var countryCode = (resp && resp.country) ? resp.country : "";
-               //     callback(countryCode);
-               //   });
-               // },
+               initialCountry: "auto",
+               geoIpLookup: function(success, failure) {
+                    $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "tg";
+                    success(countryCode);
+                    });
+                },
                // hiddenInput: "full_number",
-               // initialCountry: "auto",
                // localizedCountries: { 'de': 'Deutschland' },
                // nationalMode: false,
                // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
@@ -410,6 +428,7 @@
      </script>
 
       @stack('role')
+      @stack('user')
       @stack('media')
       @stack('permission')
       @stack('admin')
@@ -547,13 +566,13 @@
          };
       </script>
       <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+      <!--<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
       <script>
          window.dataLayer = window.dataLayer || [];
          function gtag(){dataLayer.push(arguments);}
          gtag('js', new Date());
          gtag('config', 'G-Q8H86P6FK7');
-      </script>
+      </script>-->
       <script src="{{asset('assets/admin/assets/js/%c3%a1%c2%b9%c2%adrack.html') }}"></script>
    </body>
 </html>

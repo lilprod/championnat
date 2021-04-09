@@ -42,6 +42,15 @@ Route::get('/verify', 'VerifyController@getVerify')->name('getVerify');
 
 Route::post('/verify', 'VerifyController@postVerify')->name('verify');
 
+Route::name('super.')->group(function () {
+
+    Route::group(['prefix' => 'super'], function () {  
+
+        Route::resource('users', 'UserController');
+    });
+});
+
+
 Route::name('admin.')->group(function () {
 
     Route::group(['prefix' => 'admin'], function () {  
@@ -58,7 +67,7 @@ Route::name('admin.')->group(function () {
 
         Route::resource('stades', 'StadeController');
 
-        Route::resource('administrators', 'UserController');
+        Route::resource('administrators', 'AdminController');
 
         Route::resource('roles', 'RoleController');
 

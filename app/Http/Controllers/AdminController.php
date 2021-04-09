@@ -8,14 +8,13 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Storage;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'super']); //supAdmin middleware lets only users with a //specific permission permission to access these resources
+        $this->middleware(['auth', 'isAdmin']); //supAdmin middleware lets only users with a //specific permission permission to access these resources
     }
     /**
      * Display a listing of the resource.
@@ -24,11 +23,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //Get all users and pass it to the view
-       // $users = User::all();
-        $users = User::whereIn('role_id', [1,3])->get();
+        $users = User::where('role_id', 1)->get();
 
-        return view('admin.users.index', ['users' => $users]);
+        $roles = Role::whereNotIn('id', array(1,2))->get();
+
+        return view('admin.administrators.index', ['roles' => $roles, 'users' => $users]);
     }
 
     /**
@@ -38,12 +37,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //Get all roles and pass it to the view
-        //$roles = Role::get();
-        $roles = Role::whereNotIn('id', array(2))->get();
+        $roles = Role::whereNotIn('id', array(2,3))->get();
+        //dd($roles);
 
-        return view('admin.users.create', ['roles' => $roles]);
-
+        return view('admin.administrators.create', ['roles' => $roles]);
     }
 
     /**
@@ -92,7 +89,7 @@ class UserController extends Controller
         $user->profile_picture = $fileNameToStore;
         $user->phone_number = $request->input('phone_number');
         $user->address = $request->input('address');
-        $user->role_id = 3;
+        $user->role_id = 1;
 
         $user->save();
 
@@ -105,7 +102,7 @@ class UserController extends Controller
             }
         }
         //Redirect to the admin.users.index view and display message
-        return redirect()->route('super.users.index')
+        return redirect()->route('admin.administrators.index')
             ->with('success', 'Administrateur ajouté avec succès.');
     }
 
@@ -117,7 +114,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return redirect('admin.users');
+        return redirect('users');
     }
 
     /**
@@ -130,9 +127,9 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id); //Get user with specified id
         //$roles = Role::get(); //Get all roles
-        $roles = Role::whereNotIn('id', array(2))->get();
+        $roles = Role::whereNotIn('id', array(2,3))->get();
 
-        return view('admin.users.edit', compact('user', 'roles')); //pass user and roles data to view
+        return view('admin.administrators.edit', compact('user', 'roles')); //pass user and roles data to view
     }
 
     /**
@@ -196,7 +193,7 @@ class UserController extends Controller
             $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
         }
 
-        return redirect()->route('super.users.index')
+        return redirect()->route('admin.administrators.index')
             ->with('success', 'Administrateur edité avec succès.');
     }
 
@@ -215,7 +212,7 @@ class UserController extends Controller
         }
         $user->delete();
 
-        return redirect()->route('super.users.index')
+        return redirect()->route('admin.administrators.index')
             ->with('success',
              'Administrateur supprimé avec succès.');
     }

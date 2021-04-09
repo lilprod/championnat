@@ -8,11 +8,11 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Administrateurs</h5>
+                    <h5 class="m-b-10">Utilisateurs</h5>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="#!">Administrateurs</a></li>
+                    <li class="breadcrumb-item"><a href="#!">Utilisateurs</a></li>
                     <li class="breadcrumb-item">Edition</li>
                 </ul>
             </div>
@@ -27,10 +27,10 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h5>Editer administrateur </h5>
+                <h5>Editer utilisateur </h5>
             </div>
 
-            {{ Form::model($user, array('route' => array('admin.administrators.update', $user->id) , 'method' => 'PUT', 'enctype' => 'multipart/form-data')) }}{{-- Form model binding to automatically populate our fields with user data --}}
+            {{ Form::model($user, array('route' => array('super.users.update', $user->id) , 'method' => 'PUT', 'enctype' => 'multipart/form-data')) }}{{-- Form model binding to automatically populate our fields with user data --}}
 
             <div class="card-body">
                 <div class="row">
@@ -80,7 +80,7 @@
                       
                         <div class="col-md-6 pr-0">
                           <div class="form-group">
-                              {{ Form::label('profile_picture', 'Photo de profil') }}
+                              {{ Form::label('profile_picture', 'Image de profil') }}
                               {{ Form::file('profile_picture', array('class' => 'form-control')) }}
                           </div>
                       </div>
@@ -100,7 +100,7 @@
             </div>
 
             <div class="card-footer">
-				{{ Form::submit('Editer Administrateur', array('class' => 'btn btn-primary btn-block')) }}
+				{{ Form::submit('Editer utilisateur', array('class' => 'btn btn-primary btn-block')) }}
 			</div>
 		    {{ Form::close() }}
         </div>
