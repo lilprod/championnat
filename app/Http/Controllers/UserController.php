@@ -93,6 +93,7 @@ class UserController extends Controller
         $user->phone_number = $request->input('phone_number');
         $user->address = $request->input('address');
         $user->role_id = 3;
+        $user->is_activated = 1;
 
         $user->save();
 

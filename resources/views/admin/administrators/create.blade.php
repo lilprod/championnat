@@ -25,6 +25,8 @@
 <div class="row">
     <!-- subscribe start -->
     <div class="col-sm-12">
+
+        @include('inc.messages')
         <div class="card">
             <div class="card-header">
                 <h5>Nouvel administrateur </h5>

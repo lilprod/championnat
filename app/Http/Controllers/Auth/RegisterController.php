@@ -232,4 +232,40 @@ class RegisterController extends Controller
 
         return $user;
     }
+
+    protected function createMedia(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        $fileNameToStore = 'avatar.jpg';
+
+        $user = User::create([
+            'name' => $request['nom_media'],
+            'email' => $request['email'],
+            'password' => $request['password'],
+            'role_id' => 2,
+            'profile_picture' => $fileNameToStore
+        ]);
+
+        $user->assignRole('Media');
+
+        $media = new Media();
+
+        $media->nom_media = $request['nom_media'];
+        $media->email = $request['email'];
+        $media->phone_number = $request['phone_number'];
+        $media->type_media_id = $request['type_media_id'];
+        $media->profile_picture = $fileNameToStore;
+        $media->user_id = $user->id;
+
+        $media->save();
+
+        /*if ($user) {
+            $user->code = $this::sendCode($user->email, $user->phone_number);
+            $user->save();
+        }*/
+
+        return redirect()->intended('login');
+    
+    }
 }

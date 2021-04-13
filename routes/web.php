@@ -28,19 +28,44 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 // Registration Routes...
 Route::get('inscription', 'Auth\RegisterController@showRegistrationForm')->name('inscription');
 
-Route::post('register', 'Auth\RegisterController@register');
+Route::post('register', 'Auth\RegisterController@createMedia');
+
+//Route::post('register', 'Auth\RegisterController@register');
 
 Route::post('save', 'Auth\RegisterController@save')->name('save');
 
 //Route::get('/getStades', 'Auth\RegisterController@getStades')->name('getStades');
 Route::get('/getStades', 'DashboardController@getStades')->name('getStades');
 
+//Activé Journée
+
 Route::get('changeStatus', 'JourneeController@ChangeUserStatus')->name('changeStatus');
+
+//Activé compte d'un Media
+Route::get('updateStatus', 'AdminController@ChangeUserStatus')->name('updateStatus');
 
 //Account Verification
 Route::get('/verify', 'VerifyController@getVerify')->name('getVerify');
 
 Route::post('/verify', 'VerifyController@postVerify')->name('verify');
+
+//Post Category
+
+//Route::get('categorie/{slug}', ['as' => 'categoryPosts', 'uses' => 'PagesController@categoryPosts']);
+
+//Route::get('post/{slug}', ['as' => 'blog.show', 'uses' => 'PagesController@postDetails']);
+
+//Route::get('post/author/{name}', ['as' => 'author.show', 'uses' => 'PagesController@authorPost']);
+
+Route::get('categorie/check_slug', 'CategoryController@check_slug')->name('category.check_slug');
+
+Route::get('postn/check_slug', 'PostController@check_slug')->name('post.check_slug');
+
+Route::get('/pending/posts', 'PostController@pending')->name('pending_posts');
+
+Route::resource('posts', 'PostController');
+
+//Route Super Admin
 
 Route::name('super.')->group(function () {
 
@@ -50,12 +75,17 @@ Route::name('super.')->group(function () {
     });
 });
 
+//Routes Admin
 
 Route::name('admin.')->group(function () {
 
     Route::group(['prefix' => 'admin'], function () {  
 
+        Route::resource('categories', 'CategoryController');
+
         Route::resource('medias', 'MediaController');
+
+        Route::get('/pending/media', 'MediaController@pending')->name('pending_media');
 
         Route::resource('typemedias', 'TypeMediaController');
 
@@ -83,6 +113,8 @@ Route::name('admin.')->group(function () {
 
     });
 });
+
+//Routes Media
 
 Route::name('media.')->group(function () {
 

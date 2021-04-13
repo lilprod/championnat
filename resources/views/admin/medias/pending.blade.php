@@ -8,7 +8,7 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Média</h5>
+                    <h5 class="m-b-10">Média en attente d'activation</h5>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
@@ -28,7 +28,7 @@
         @include('inc.messages')
         <div class="card">
             <div class="card-header">
-                <h5> Liste des média </h5>
+                <h5> Liste des média en attente d'activation </h5>
             </div>
             <div class="card-body">
                 <!--<div class="row align-items-center m-l-0">
@@ -60,7 +60,6 @@
                                 <td>{{ $media->nom_media }}</td>
                                 <td>{{ $media->email }}</td>
                                 <td>{{ $media->phone_number }}</td>
-                                
                                 <td>{{ $media->created_at->format('F d, Y h:ia') }}</td>
                                 <td>
                                     <div class="form-check form-switch custom-switch-v1">

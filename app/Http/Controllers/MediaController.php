@@ -25,9 +25,38 @@ class MediaController extends Controller
     public function index()
     {
         //Get all medias and pass it to the view
-        $medias = Media::all();
+        //$medias = Media::all();
+
+        $users = [];
+        $users = User::select('id')
+                        ->where('is_activated', 1)
+                        ->where('role_id', 2)
+                        ->get();
+
+        $medias = Media::whereIn('user_id', $users)
+                        ->get();
 
         return view('admin.medias.index')->with('medias', $medias);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pending()
+    {
+        //Get all medias and pass it to the view
+        $users = [];
+        $users = User::select('id')
+                        ->where('is_activated', 0)
+                        ->where('role_id', 2)
+                        ->get();
+
+        $medias = Media::whereIn('user_id', $users)
+                        ->get();
+
+        return view('admin.medias.pending')->with('medias', $medias);
     }
 
     /**

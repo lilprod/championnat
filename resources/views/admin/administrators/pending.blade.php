@@ -8,11 +8,11 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Média</h5>
+                    <h5 class="m-b-10">Administrateurs</h5>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="#!">Média</a></li>
+                    <li class="breadcrumb-item"><a href="#!">Administrateurs</a></li>
                     <li class="breadcrumb-item">Liste</li>
                 </ul>
             </div>
@@ -28,48 +28,45 @@
         @include('inc.messages')
         <div class="card">
             <div class="card-header">
-                <h5> Liste des média </h5>
+                <h5> Liste des administrateurs </h5>
             </div>
             <div class="card-body">
-                <!--<div class="row align-items-center m-l-0">
+                <div class="row align-items-center m-l-0">
                     <div class="col-sm-6">
                     </div>
                     <div class="col-sm-6 text-end">
-                        <a href="{{ route('admin.medias.create') }}" class="btn btn-primary btn-sm mb-3 btn-round" data-toggle="" data-target=""> <i class="fa fa-plus"></i>
-                            Ajouter média
+                        <a href="{{ route('admin.administrators.create') }}" class="btn btn-primary btn-sm mb-3 btn-round" data-toggle="" data-target=""> <i class="fa fa-plus"></i>
+                            Ajouter Admin
                         </a>
                     </div>
-                </div>-->
+                </div>
                 <div class="dt-responsive table-responsive">
                     <table id="simpletable" class="table table-striped table-bordered nowrap">
                         <thead>
                             <tr>
-                                <th>Type Média</th>
-                                <th>Nom </th>
+                                <th>Nom et Prénom(s)</th>
                                 <th>Email</th>
-                                <th>Téléphone</th>
                                 <th>Date/Heure d'ajout</th>
                                 <th>Statut</th>
+                                <th>Rôle</th>
                                 <th style="width: 10%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($medias as $i=>$media)
+                            @foreach ($users as $i=>$user)
                             <tr>
-                                <td>{{ $media->type->title }}</td>
-                                <td>{{ $media->nom_media }}</td>
-                                <td>{{ $media->email }}</td>
-                                <td>{{ $media->phone_number }}</td>
-                                
-                                <td>{{ $media->created_at->format('F d, Y h:ia') }}</td>
+                                <td>{{ $user->name }} {{ $user->firstname }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->created_at->format('F d, Y h:ia') }}</td>
                                 <td>
                                     <div class="form-check form-switch custom-switch-v1">
-                                        <input type="checkbox" data-id="{{$media->id}}" id="status_{{$i}}" class="form-check-input input-primary check" id="status_{{$i}}" {{ $media->user->is_activated ? 'checked' : '' }}>
+                                        <input type="checkbox" data-id="{{$user->id}}" id="status_{{$i}}" class="form-check-input input-primary check" id="status_{{$i}}" {{ $user->is_activated ? 'checked' : '' }}>
                                     </div>
                                 </td>
+                                <td>{{  $user->roles()->pluck('name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
                                 <td>
-                                    <!--<a href="{{ route('admin.medias.edit', $media->id) }}" class="btn btn-primary btn-sm">Editer</a>-->
-                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirm" onclick="deleteData({{ $media->id}})" data-original-title="Supprimer">Supprimer</button>
+                                    <a href="{{ route('admin.administrators.edit', $user->id) }}" class="btn btn-primary btn-sm">Editer</a>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirm" onclick="deleteData({{ $user->id}})" data-original-title="Supprimer">Supprimer</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -95,7 +92,7 @@
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <img src="{{asset('assets/admin/assets/images/sent.png')}}" alt="" width="50" height="46">
-                    <p>Voulez-vous supprimer ce média?</p>
+                    <p>Voulez-vous supprimer cet administrateur?</p>
                     
                 </div>
 
@@ -110,28 +107,12 @@
 
 @endsection
 
-@push('media')
+@push('admin')
 <script>
-
-    $('.check').change(function() {
-        var status = $(this).prop('checked') == true ? 1 : 0; 
-        var media_id = $(this).data('id'); 
-         
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: '{!!URL::route('updateStatus')!!}',
-            data: {'status': status, 'media_id': media_id},
-            success: function(data){
-              console.log(data.success)
-            }
-        });
-    })
-
     function deleteData(id)
     {
         var id = id;
-        var url = '{{ route("admin.medias.destroy", ":id") }}';
+        var url = '{{ route("admin.administrators.destroy", ":id") }}';
         url = url.replace(':id', id);
         $("#deleteForm").attr('action', url);
     }

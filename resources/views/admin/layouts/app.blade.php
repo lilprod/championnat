@@ -106,6 +106,8 @@
                      </ul>
                   </li>
 
+                  <li class="pc-item"><a href="{{route('posts.index')}}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">info</i></span><span class="pc-mtext">FTF Média</span></a></li>
+
                   @endcan
 
                   @can('Super Permissions')
@@ -138,6 +140,22 @@
                @can('Admin Permissions')
 
                <li class="pc-item pc-hasmenu">
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Catégories</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <ul class="pc-submenu">
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.categories.index')}}">Liste</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.categories.create')}}">Ajouter</a></li>
+                  </ul>
+               </li>
+
+               <li class="pc-item pc-hasmenu">
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">info</i></span><span class="pc-mtext">Actualités</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <ul class="pc-submenu">
+                     <li class="pc-item"><a class="pc-link" href="{{route('posts.index')}}">Liste</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('posts.create')}}">Ajouter</a></li>
+                  </ul>
+               </li>
+
+               <li class="pc-item pc-hasmenu">
                   <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">sports_baseball</i></span><span class="pc-mtext">Matchs</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                   <ul class="pc-submenu">
                      <li class="pc-item"><a class="pc-link" href="{{route('admin.evenements.index')}}">Liste</a></li>
@@ -167,6 +185,7 @@
                      <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">play_arrow</i></span><span class="pc-mtext">Média</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                      <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{route('admin.medias.index')}}">Liste</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{route('admin.pending_media')}}">En attente</a></li>
                         <!--<li class="pc-item"><a class="pc-link" href="{{route('admin.medias.create')}}">Ajouter</a></li>-->
                      </ul>
                   </li>
@@ -427,6 +446,8 @@
          });
      </script>
 
+      @stack('category')
+      @stack('post')
       @stack('role')
       @stack('user')
       @stack('media')
@@ -445,6 +466,7 @@
       @stack('inscription_stade')
       @stack('inscription_media')
       @stack('slug')
+      @stack('scripts')
       <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> -->
       <!-- <script src="assets/js/plugins/clipboard.min.js"></script> -->
       <!-- <script src="assets/js/uikit.min.js"></script> -->

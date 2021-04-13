@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Media;
 //Importing laravel-permission models
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -41,6 +42,19 @@ class AdminController extends Controller
         //dd($roles);
 
         return view('admin.administrators.create', ['roles' => $roles]);
+    }
+
+    public function changeUserStatus(Request $request)
+    {
+        $media = Media::findOrFail($request->media_id);
+        $user = User::where('id', $media->user_id)->first();
+        //$media->status = $request->status;
+        $user->is_activated = $request->status;
+
+        //$media->save();
+        $user->save();
+  
+        return response()->json(['success'=>'User status change successfully.']);
     }
 
     /**
@@ -90,6 +104,7 @@ class AdminController extends Controller
         $user->phone_number = $request->input('phone_number');
         $user->address = $request->input('address');
         $user->role_id = 1;
+        $user->is_activated = 1;
 
         $user->save();
 
