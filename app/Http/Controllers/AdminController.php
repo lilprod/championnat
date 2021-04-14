@@ -8,6 +8,7 @@ use App\Models\Media;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\SendActivationMail;
 
 use Illuminate\Http\Request;
 
@@ -53,6 +54,8 @@ class AdminController extends Controller
 
         //$media->save();
         $user->save();
+
+        Mail::to($media->email)->send(new SendActivationMail($media->nom_media, $media->email, $media->phone_number));
   
         return response()->json(['success'=>'User status change successfully.']);
     }

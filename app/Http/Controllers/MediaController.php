@@ -8,6 +8,7 @@ use App\Models\Media;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\SendActivationMail;
 
 use Illuminate\Http\Request;
 

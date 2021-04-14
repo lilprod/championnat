@@ -30,11 +30,11 @@
     @foreach ($posts as $post)
         <div class="col-md-6 col-xl-4">
             <div class="card mb-3">
-                <!--<img class="img-fluid card-img-top" src="{{asset('assets/admin/assets/images/slider/img-slide-3.jpg') }}" alt="Card image cap">-->
+                <img class="img-fluid card-img-top" src="{{url('/storage/cover_images/'.$post->cover_image ) }}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{$post->title}}</h5>
                     <p class="card-text">{!! \Illuminate\Support\Str::limit($post->body, 100, '...') !!}</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                   <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
                 </div>
 
                 <div class="card-footer">

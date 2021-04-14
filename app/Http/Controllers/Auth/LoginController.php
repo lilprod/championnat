@@ -92,7 +92,7 @@ class LoginController extends Controller
 
         if($user && Hash::check($request->password, $user->password) && $user->is_activated !=1){
             
-            $errors = [$this->username() => 'Votre compte n\'est pas encore actif! Nos adnistrateurs s\'en chargeront dès que vos informations ont été vérifiées'];
+            $errors = [$this->username() => 'Votre compte n\'est pas encore actif! Nos administrateurs s\'en chargeront dès que vos informations ont été vérifiées'];
         }
  
         if ($request->expectsJson()) {
