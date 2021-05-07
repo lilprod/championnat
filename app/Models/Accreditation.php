@@ -38,4 +38,9 @@ class Accreditation extends Model
     {
         return $this->belongsTo('App\Models\Stade');
     }
+    
+    public function agent()
+    {
+        return $this->hasOne('App\Models\Agent');
+    }
 }

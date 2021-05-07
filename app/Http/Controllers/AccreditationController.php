@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\TypeMedia;
 use App\Models\Ville;
 use App\Models\Stade;
+use App\Models\Agent;
 use App\Models\Evenement;
 use App\Models\Media;
 use App\Models\Accreditation;
@@ -216,30 +217,57 @@ class AccreditationController extends Controller
 
                     $event_final->left_place = $event_final->left_place - 1 ;
 
-                    $mediaFinal = Media::where('user_id', auth()->user()->id)->first();
+                    // $mediaFinal = Media::where('user_id', auth()->user()->id)->first();
 
-                    $mediaFinal->name = $request->input('name');
-                    $mediaFinal->firstname = $request->input('firstname');
-                    $mediaFinal->gender = $request->input('gender');
-                    $mediaFinal->address = $request->input('address');
-                    $mediaFinal->birth_date = $request->input('birth_date');
-                    $mediaFinal->nationality = $request->input('nationality');
-                    $mediaFinal->profession = $request->input('profession');
-                    $mediaFinal->num_passport = $request->input('num_passport');
+                    // $mediaFinal->name = $request->input('name');
+                    // $mediaFinal->firstname = $request->input('firstname');
+                    // $mediaFinal->gender = $request->input('gender');
+                    // $mediaFinal->address = $request->input('address');
+                    // $mediaFinal->birth_date = $request->input('birth_date');
+                    // $mediaFinal->nationality = $request->input('nationality');
+                    // $mediaFinal->profession = $request->input('profession');
+                    // $mediaFinal->num_passport = $request->input('num_passport');
+
+                    $agent = new Agent();
+                    $agent->accreditation_id = $accreditation->id;
+                    $agent->media_id = $media->id;
+                    $agent->type_media_id = $media->type_media_id;
+                    $agent->type_accreditation_id = $request->input('type_accreditation_id');
+                    $agent->name = $request->input('name');
+                    $agent->firstname = $request->input('firstname');
+                    $agent->gender = $request->input('gender');
+                    $agent->address = $request->input('address');
+                    $agent->birth_date = $request->input('birth_date');
+                    $agent->nationality = $request->input('nationality');
+                    $agent->profession = $request->input('profession');
+                    $agent->num_passport = $request->input('num_passport');
 
                     if ($request->hasfile('passport_image')) {
-                        $mediaFinal->passport_image = $passportNameToStore;
+                         $agent->passport_image = $passportNameToStore;
                     }
 
                     if ($request->hasfile('profile_picture')) {
-                        $mediaFinal->profile_picture = $fileNameToStore;
+                         $agent->profile_picture = $fileNameToStore;
                     }
 
                     if ($request->hasfile('press_card_image')) {
-                        $mediaFinal->press_card_image = $pressCardNameToStore;
+                         $agent->press_card_image = $pressCardNameToStore;
                     }
+
+                    // if ($request->hasfile('passport_image')) {
+                    //     $mediaFinal->passport_image = $passportNameToStore;
+                    // }
+
+                    // if ($request->hasfile('profile_picture')) {
+                    //     $mediaFinal->profile_picture = $fileNameToStore;
+                    // }
+
+                    // if ($request->hasfile('press_card_image')) {
+                    //     $mediaFinal->press_card_image = $pressCardNameToStore;
+                    // }
         
-                    $mediaFinal->save();
+                    // $mediaFinal->save();
+                    $agent->save();
                     $event_final->save();
 
                     Mail::to($media->email)->send(new SendUserMail($accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, $accreditation->evenement->date_match, $accreditation->evenement->title));
@@ -256,7 +284,9 @@ class AccreditationController extends Controller
                 }
 
             }else{
-                return back()->with('error', 'Il y a pas de match prévu pour ce stade!Veuillez choisir un autre svp');
+                return back()->with('error', 'Il y a pas de match prévu pour ce stade! Veuillez choisir un autre svp.');
+
+                //return redirect('/media/accreditations/create#international')->with('error', 'Il y a pas de match prévu pour ce stade! Veuillez choisir un autre svp.');
             }
         }
 
