@@ -106,6 +106,10 @@ Route::name('admin.')->group(function () {
         Route::resource('evenements', 'EvenementController');
 
         Route::resource('accreditations', 'InscriptionController');
+
+        Route::patch('international/accreditation/upadte', 'InscriptionController@international_update')->name('international_accreditation_update');
+
+        Route::get('international/accreditation/{id}/edit', ['as' => 'inter_accreditation_edit', 'uses' => 'InscriptionController@edit_inter']);
         
         Route::get('/inscription/media', 'EtatController@media')->name('inscription_media');
 
@@ -124,6 +128,10 @@ Route::name('media.')->group(function () {
 
         Route::post('international/accreditation/save', 'AccreditationController@save')->name('international_accreditation_save');
 
+        Route::patch('international/accreditation/upadte', 'AccreditationController@international_update')->name('international_accreditation_update');
+        
+        Route::get('international/accreditation/{id}/edit', ['as' => 'inter_accreditation_edit', 'uses' => 'AccreditationController@edit_inter']);
+        
         Route::get('/accreditation/pending', 'AccreditationController@pending')->name('accreditation_pending');
 
         Route::get('/accreditation/archived', 'AccreditationController@archived')->name('accreditation_archived');

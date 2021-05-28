@@ -34,7 +34,8 @@
             </div>
 
             <form method="POST" action="{{ route('media.accreditations.update', $accreditation->id) }}" enctype="multipart/form-data">
-                @csrf
+                {{ csrf_field() }}
+                {{ method_field('PATCH') }}
 
                 <div class="card-body">
 
@@ -44,9 +45,8 @@
                             <div class="form-group">
                                 <label>Ville de couverture<span class="text-danger">*</span></label>
                                 <select name="ville_id" id="ville" class="form-control" required>
-                                    <option value = "">--Sectionner votre ville--</option>
                                     @foreach ($villes as $ville)
-                                        <option value="{{$ville->id}}">{{$ville->title}}</option>	
+                                        <option value="{{$ville->id}}" {{ ($accreditation->ville_id == $ville->id) ? 'selected' : '' }}>{{$ville->title}}</option>	
                                     @endforeach
                                 </select>
                             </div>
@@ -56,7 +56,9 @@
                             <div class="form-group">
                                 <label>Stade <span class="text-danger">*</span></label>
                                 <select name="stade_id" id="stade" class="form-control" required>
-                                    
+                                    @foreach ($stades as $stade)
+                                        <option value="{{$stade->id}}" {{ ($accreditation->stade_id == $stade->id) ? 'selected' : '' }}>{{$stade->title}}</option>	
+                                    @endforeach	
                                 </select>
                             </div>
                         </div>

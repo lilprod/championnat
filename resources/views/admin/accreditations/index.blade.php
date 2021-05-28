@@ -64,8 +64,13 @@
                                 <td>{{ $inscription->evenement->journee->code}}</td>
                                 <td>{{ $inscription->evenement->stade->ville->title }}</td>
                                 <td>{{ $inscription->evenement->stade->title }}</td>
+                                
                                 <td>
+                                    @if($inscription->type_accreditation_id == 1 )
                                     <a href="{{ route('admin.accreditations.edit', $inscription->id) }}" class="btn btn-primary btn-sm">Editer</a>
+                                    @else
+                                    <a href="{{ route('admin.inter_accreditation_edit', $inscription->id) }}" class="btn btn-primary btn-sm">Editer</a>
+                                    @endif
                                     <button class="btn btn-danger btn-sm" data-ts-toggle="modal" onclick="deleteData({{ $inscription->id}})" data-ts-target="#confirm" data-original-title="Supprimer">Supprimer</button>
                                 </td>
                             </tr>
