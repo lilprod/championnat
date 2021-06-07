@@ -394,7 +394,7 @@
       </script>
 
       <!-- Ckeditor js -->
-      <!--<script src="{{asset('assets/admin/assets/js/plugins/ckeditor.js') }}"></script>
+      <script src="{{asset('assets/admin/assets/js/plugins/ckeditor.js') }}"></script>
       <script type="text/javascript">
          $(window).on('load', function() {
             $(function() {
@@ -404,7 +404,7 @@
                      });
             });
          });
-      </script>-->
+      </script>
 
 
       <!-- datatable Js -->

@@ -30,14 +30,14 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <ul class="nav nav-tabs nav-tabs-solid">
+                       <!-- <ul class="nav nav-tabs nav-tabs-solid">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Actualités actives</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Actualités en attente</a>
                             </li>
-                        </ul>
+                        </ul>-->
                     </div>
                     <div class="col-auto">
                         <a class="btn btn-primary btn-sm" href="{{route('posts.create')}}"><i class="fas fa-plus mr-1"></i> Ajouter actualité</a>
@@ -140,7 +140,7 @@
                     </div>
                 </div>
             <!-- /Add Blog -->
-            </div>
+           
 
             <div class="card-footer">
                 <div class="submit-section">
