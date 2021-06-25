@@ -57,7 +57,7 @@
                                 <td>{{$category->title}}</td>
                                 <td>
                                     <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-info btn-sm">Editer</a>
-                                    <button class="btn btn-danger btn-sm" data-toggle="modal" onclick="deleteData({{ $category->id}})" data-target="#confirm" data-original-title="Supprimer">Supprimer</button>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirm" onclick="deleteData({{ $category->id}})" data-original-title="Supprimer">Supprimer</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -72,21 +72,27 @@
 <!-- [ Main Content ] end -->
 
 
-<div id="confirm" class="modal fade delete-modal" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
+
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <form action="" id="deleteForm" method="post">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation de suppression</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body text-center">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
-                    <img src="{{asset('/assets/assets/img/sent.png')}}" alt="" width="50" height="46">
-                    <p>Are you really to want to delete this Category?</p>
+                    <img src="{{asset('assets/admin/assets/images/sent.png')}}" alt="" width="50" height="46">
+                    <p>Voulez-vous supprimer cette catégorie?</p>
                     
                 </div>
-                <div class="m-b-20 text-center"> 
-                    <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </div>
             </div>
         </form>
     </div>

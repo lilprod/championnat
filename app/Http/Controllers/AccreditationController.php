@@ -333,6 +333,7 @@ class AccreditationController extends Controller
                     $accreditation = new Accreditation(); 
 
                     $accreditation->media_id = $media->id;
+                    $accreditation->type_media_id = $media->type_media_id;
 
                     $accreditation->type_accreditation_id = $request->input('type_accreditation_id');
 

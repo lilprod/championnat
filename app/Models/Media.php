@@ -33,4 +33,9 @@ class Media extends Model
     {
         return $this->belongsTo('App\Models\TypeMedia', 'type_media_id');
     }
+
+    public function accreditations()
+    {
+        return $this->hasMany('App\Models\Accreditation');
+    }
 }

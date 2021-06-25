@@ -432,12 +432,24 @@
                "sNext":"Suivant",
                "sPrevious":"Précédent"
              },
-             //"sInfo" : "Afficher START à END des TOTAL lignes",
-             "sInfoEmpty" : "Afficher 0 à 0 des 0 données",
-             //"sInfoFiltered" : "Trié de MAX lignes totales",
-             "sEmptyTable" : "Pas de données disponible dans la table",
-             //"sLengthMenu" : "Afficher MENU lignes",
-             "sZeroRecords" : "Aucune donnée correspondante trouvée"
+               "sInfo" : "Afficher _START_ à _END_ des _TOTAL_ lignes",
+               "sInfoEmpty" : "Afficher 0 à 0 des 0 données",
+               "sInfoFiltered" : "Trié de _MAX_ lignes totales",
+               "sEmptyTable" : "Pas de données disponible dans la table",
+               "sLengthMenu" : "Afficher _MENU_ lignes",
+               "sZeroRecords" : "Aucune donnée correspondante trouvée",
+               "sProcessing": "Traitement en cours ...",
+               "oAria": {
+                     "sSortAscending":  ": Activer pour trier la colonne par ordre croissant ",
+                     "sSortDescending": ": Activer pour trier la colonne par ordre décroissant"
+               },
+               "select": {
+                  "rows": {
+                     "_": "%d lignes sélectionnées",
+                     "0": "Aucune ligne sélectionnée",
+                     "1": "1 ligne sélectionnée"
+                  }
+               }
            }
          });
  

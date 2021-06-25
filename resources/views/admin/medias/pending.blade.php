@@ -63,7 +63,7 @@
                                 <td>{{ $media->created_at->format('F d, Y h:ia') }}</td>
                                 <td>
                                     <div class="form-check form-switch custom-switch-v1">
-                                        <input type="checkbox" data-id="{{$media->id}}" id="status_{{$i}}" class="form-check-input input-primary check" id="status_{{$i}}" {{ $media->user->is_activated ? 'checked' : '' }}>
+                                        <input type="checkbox" data-id="{{$media->id}}" id="status_{{$i}}" class="form-check-input input-primary check" {{ $media->user->is_activated ? 'checked' : '' }}>
                                     </div>
                                 </td>
                                 <td>

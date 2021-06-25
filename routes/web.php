@@ -139,9 +139,9 @@ Route::name('media.')->group(function () {
     });
 });     
 
-Route::post('post/inscription/stade', 'EtatController@postStade')->name('post_inscription_stade');
+Route::get('post/inscription/stade', 'EtatController@postStade')->name('post_inscription_stade');
 
-Route::post('post/inscription/media', 'EtatController@postMedia')->name('post_inscription_media');
+Route::get('post/inscription/media', 'EtatController@postMedia')->name('post_inscription_media');
 
 Route::post('search/inscription/stade', 'EtatController@searchStade')->name('search_inscription_stade');
 

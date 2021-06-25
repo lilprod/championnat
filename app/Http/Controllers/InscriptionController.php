@@ -503,6 +503,10 @@ class InscriptionController extends Controller
     {
         $accreditation = Accreditation::findOrFail($id);
 
+        $event = Evenement::findOrFail($accreditation->evenement_id);
+        $event->left_place =  $event->left_place + 1;
+        $event->save();
+
         $accreditation->delete();
 
         return redirect()->route('admin.accreditations.index')

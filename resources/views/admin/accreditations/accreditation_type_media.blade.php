@@ -35,8 +35,8 @@
                 <div class="row">
 
                     <h5 class="text-center">Filtre</h5><hr>
-                    <form method="POST" action="{{ route('post_inscription_media') }}">
-                        @csrf
+                    <form method="GET" action="{{ route('post_inscription_media') }}">
+                      
                         <div class="form-group row">
                             <label for="stade_id" class="col-md-2 col-form-label text-md-left">Stade<span class="text-danger">*</span></label>
 
