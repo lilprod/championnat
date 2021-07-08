@@ -123,6 +123,7 @@
             data: {'status': status, 'media_id': media_id},
             success: function(data){
               console.log(data.success)
+              location.reload();
             }
         });
     })

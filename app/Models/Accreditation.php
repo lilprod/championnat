@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Accreditation extends Model
 {
@@ -43,4 +44,24 @@ class Accreditation extends Model
     {
         return $this->hasOne('App\Models\Agent');
     }
+
+    public function scopePending($query)
+    {
+        return $query->where('status', 0)->whereDate('date_match', '>' , Carbon::now()->toDateString()); 
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1)->whereDate('date_match', '>' , Carbon::now()->toDateString()); 
+    }
+
+    public function scopeArchived($query)
+    {
+        return $query->whereDate('date_match', '<' , Carbon::now()->toDateString()); 
+    }
+
+    // public function scopeNotactive($query)
+    // {
+    //     return $query->where('is_active', 0); 
+    // }
 }

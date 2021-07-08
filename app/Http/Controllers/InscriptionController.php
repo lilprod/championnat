@@ -30,9 +30,62 @@ class InscriptionController extends Controller
      */
     public function index()
     {
-        $inscriptions = Accreditation::all(); //Get all inscriptions
+        //$inscriptions = Accreditation::all(); //Get all inscriptions
+
+        $inscriptions = Accreditation::pending()->get();
 
         return view('admin.accreditations.index')->with('inscriptions', $inscriptions);
+    }
+
+    public function active()
+    {
+        $inscriptions = Accreditation::active()->get();
+
+        return view('admin.accreditations.active')->with('inscriptions', $inscriptions);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function archived()
+    {
+        $inscriptions = Accreditation::archived()->get();
+
+        return view('admin.accreditations.archived')->with('inscriptions', $inscriptions);
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $accreditation = Accreditation::findOrFail($request->accreditation_id);
+
+        $media = Media::findOrFail($accreditation->media_id);
+
+        $event = Evenement::findOrFail($accreditation->evenement_id);
+
+        if($event->left_place > 0){
+
+            $accreditation->status = $request->status;
+
+            $accreditation->activated_at = Carbon::now();
+
+            $accreditation->save();
+
+            $event->left_place = $event->left_place - 1 ;
+
+            $event->save();
+
+            Mail::to($media->email)->send(new SendUserMail($accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, $accreditation->evenement->date_match, $accreditation->evenement->title));
+
+            Mail::to('ftf.accreditation@gmail.com')->send(new SendAdminMail($media->type->title, $media->nom_media, $media->phone_number, $media->email, $accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, Carbon::parse($accreditation->evenement->date_match)->format('d/m/Y'), $accreditation->evenement->title, $accreditation->evenement->left_place, $accreditation->evenement->quota));
+    
+            return response()->json(['success'=> 1]);
+
+        }else{
+
+            return response()->json(['success'=> 0]);
+        }   
     }
 
     /**

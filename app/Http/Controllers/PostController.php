@@ -15,6 +15,115 @@ class PostController extends Controller
     {
         $this->middleware(['auth']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+  
+
+    public function blog()
+    {
+        $categories = Category::all();
+
+        $latestposts = Post::orderBy('created_at', 'desc')
+                            ->where('status', 1)
+                            ->limit(3)
+                            ->get();
+
+        $posts = Post::with('category')
+                         ->where('status', 1)
+                         ->orderBy('created_at', 'desc')
+                         ->paginate(9);
+
+        foreach ($posts as $post) {
+            # code...
+           $user = User::findOrFail($post->user_id);
+
+           $post->author_image = $user->profile_picture;
+
+           $post->author = $user->name;
+
+           //$post->author = $user->name.' '.$user->firstname;
+        }
+
+
+        return view('pages.espace_media',compact('posts', 'categories', 'latestposts'));
+    }
+
+    public function postDetails($slug){
+
+        $categories = Category::all();
+
+        $latestposts = Post::orderBy('created_at', 'desc')
+                            ->where('status', 1)
+                            ->limit(3)
+                            ->get();
+
+        $post = Post::with('category')->where('slug', $slug)->first();
+
+        $user = User::findOrFail($post->user_id);
+
+        $post->author_image = $user->profile_picture;
+
+        $post->author = $user->name;
+
+        return view('pages.show',compact('post', 'categories', 'latestposts'));
+    }
+
+    public function categoryPosts($slug){
+
+        $categories = Category::all();
+
+        $latestposts = Post::orderBy('created_at', 'desc')
+                            ->limit(3)
+                            ->get();
+
+        $data = Category::with('posts')->where('slug',$slug)->first();
+
+        foreach ($data->posts as $post) {
+            # code...
+           $user = User::findOrFail($post->user_id);
+
+           $post->author_image = $user->profile_picture;
+
+           $post->author = $user->name;
+
+           //$post->author = $user->name.' '.$user->firstname;
+        }
+
+        return view('website.pages.category_posts',compact('data', 'categories', 'latestposts'));
+    }
+
+
+    public function authorPost($name)
+    {
+
+      $categories = Category::all();
+
+      $user = User::where('name', Str::upper($name))->first();
+
+      $latestposts = Post::orderBy('created_at', 'desc')
+                            ->limit(3)
+                            ->get();
+
+      $posts = $user->posts()->get();
+
+      foreach ($posts as $post) {
+            # code...
+
+           $post->author_image = $user->profile_picture;
+
+           $post->author = $user->name;
+
+           //$post->author = $user->name.' '.$user->firstname;
+      }
+
+      return view('website.pages.author_posts',compact('posts', 'user', 'categories', 'latestposts'));
+    }
+
+
     /**
      * Display a listing of the resource.
      *

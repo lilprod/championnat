@@ -8,7 +8,7 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Accréditations</h5>
+                    <h5 class="m-b-10">Accréditations actives</h5>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
@@ -26,26 +26,11 @@
     <!-- subscribe start -->
     <div class="col-sm-12">
         @include('inc.messages')
-
-        <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            
-        </div>
-
         <div class="card">
             <div class="card-header">
-                <h5> Liste des accréditations </h5>
+                <h5> Liste des accréditations actives</h5>
             </div>
             <div class="card-body">
-                <!--<div class="row align-items-center m-l-0">
-                    <div class="col-sm-6">
-                    </div>
-                    <div class="col-sm-6 text-end">
-                        <a href="#" class="btn btn-success btn-sm mb-3 btn-round"> <i class="fa fa-plus"></i>
-                            Ajouter Personnel
-                        </a>
-                    </div>
-                </div>-->
                 <div class="dt-responsive table-responsive">
                     <table id="simpletable" class="table table-striped table-bordered nowrap">
                         <thead>
@@ -71,11 +56,7 @@
                                 <td>{{ $inscription->evenement->journee->code}}</td>
                                 <td>{{ $inscription->evenement->stade->ville->title }}</td>
                                 <td>{{ $inscription->evenement->stade->title }}</td>
-                                <td>
-                                    <div class="form-check form-switch custom-switch-v1">
-                                        <input type="checkbox" data-id="{{$inscription->id}}" id="status_{{$i}}" class="form-check-input input-primary check" {{ $inscription->status ? 'checked' : '' }}>
-                                    </div>
-                                </td>
+                                <td><span class="badge bg-light-success">Active</span></td>
                                 <td>
                                     @if($inscription->type_accreditation_id == 1 )
                                     <a href="{{ route('admin.accreditations.edit', $inscription->id) }}" class="btn btn-primary btn-sm">Editer</a>
@@ -125,29 +106,6 @@
 
 @push('inscription')
 <script>
-    $('.check').change(function() {
-        var status = $(this).prop('checked') == true ? 1 : 0; 
-        var accreditation_id = $(this).data('id'); 
-         
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: '{!!URL::route('activateAccreditation')!!}',
-            data: {'status': status, 'accreditation_id': accreditation_id},
-            success: function(data){
-
-                if(data.success == 1){
-                    console.log(data.success)
-                    location.reload();
-                    $('div.success').html('<span><b> </b></span>').delay(1000).fadeOut();
-                }else{
-                    console.log(data.success)
-                    location.reload();
-                    $('div.success').html('<span><b> </b></span>').delay(1000).fadeOut();
-                }
-            }
-        });
-    })
     
     function deleteData(id)
     {

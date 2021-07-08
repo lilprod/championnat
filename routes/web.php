@@ -41,6 +41,8 @@ Route::get('/getStades', 'DashboardController@getStades')->name('getStades');
 
 Route::get('changeStatus', 'JourneeController@ChangeUserStatus')->name('changeStatus');
 
+Route::get('activateAccreditation', 'InscriptionController@ChangeStatus')->name('activateAccreditation');
+
 //Activé compte d'un Media
 Route::get('updateStatus', 'AdminController@ChangeUserStatus')->name('updateStatus');
 
@@ -53,7 +55,7 @@ Route::post('/verify', 'VerifyController@postVerify')->name('verify');
 
 //Route::get('categorie/{slug}', ['as' => 'categoryPosts', 'uses' => 'PagesController@categoryPosts']);
 
-//Route::get('post/{slug}', ['as' => 'blog.show', 'uses' => 'PagesController@postDetails']);
+Route::get('post/{slug}', ['as' => 'blog.show', 'uses' => 'PostController@postDetails']);
 
 //Route::get('post/author/{name}', ['as' => 'author.show', 'uses' => 'PagesController@authorPost']);
 
@@ -107,6 +109,10 @@ Route::name('admin.')->group(function () {
 
         Route::resource('accreditations', 'InscriptionController');
 
+        Route::get('/accreditation/active', 'InscriptionController@active')->name('accreditation.active');
+
+        Route::get('/accreditation/archive', 'InscriptionController@archived')->name('accreditation.archived');
+
         Route::patch('international/accreditation/upadte', 'InscriptionController@international_update')->name('international_accreditation_update');
 
         Route::get('international/accreditation/{id}/edit', ['as' => 'inter_accreditation_edit', 'uses' => 'InscriptionController@edit_inter']);
@@ -135,6 +141,8 @@ Route::name('media.')->group(function () {
         Route::get('/accreditation/pending', 'AccreditationController@pending')->name('accreditation_pending');
 
         Route::get('/accreditation/archived', 'AccreditationController@archived')->name('accreditation_archived');
+
+        Route::get('/espace', 'PostController@blog')->name('espace');
 
     });
 });     

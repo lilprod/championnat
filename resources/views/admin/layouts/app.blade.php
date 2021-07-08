@@ -100,17 +100,26 @@
                   <li class="pc-item pc-hasmenu">
                      <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">receipt</i></span><span class="pc-mtext">Mes accrédiations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                      <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{route('media.accreditations.index')}}">Accrédiations valides</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{route('media.accreditation_archived')}}">Accrédiations archivés</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{route('media.accreditation_pending')}}">Mes Accrédiations en attente</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{route('media.accreditations.index')}}">Mes Accrédiations actives</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{route('media.accreditation_archived')}}">Mes Accrédiations archivés</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{route('media.accreditations.create')}}">Faire une demande</a></li>
                      </ul>
                   </li>
 
-                  <li class="pc-item"><a href="{{route('posts.index')}}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">info</i></span><span class="pc-mtext">FTF Média</span></a></li>
+                  <li class="pc-item"><a href="{{route('media.espace')}}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">info</i></span><span class="pc-mtext">FTF Média</span></a></li>
 
                   @endcan
 
                   @can('Super Permissions')
+
+                     <li class="pc-item pc-hasmenu">
+                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">people</i></span><span class="pc-mtext">Utilisateurs</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <ul class="pc-submenu">
+                           <li class="pc-item"><a class="pc-link" href="{{route('super.users.index')}}">Liste</a></li>
+                           <li class="pc-item"><a class="pc-link" href="{{route('super.users.create')}}">Ajouter</a></li>
+                        </ul>
+                     </li>
 
                      <li class="pc-item pc-hasmenu">
                         <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">vpn_key</i></span><span class="pc-mtext">Permissions</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
@@ -128,30 +137,28 @@
                         </ul>
                      </li>
 
-                     <li class="pc-item pc-hasmenu">
-                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">people</i></span><span class="pc-mtext">Utilisateurs</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                        <ul class="pc-submenu">
-                           <li class="pc-item"><a class="pc-link" href="{{route('super.users.index')}}">Liste</a></li>
-                           <li class="pc-item"><a class="pc-link" href="{{route('super.users.create')}}">Ajouter</a></li>
-                        </ul>
-                     </li>
-                  @endcan
+               @endcan
 
                @can('Admin Permissions')
 
                <li class="pc-item pc-hasmenu">
-                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Catégories</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">content_copy</i></span><span class="pc-mtext">Accréditations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                   <ul class="pc-submenu">
-                     <li class="pc-item"><a class="pc-link" href="{{route('admin.categories.index')}}">Liste</a></li>
-                     <li class="pc-item"><a class="pc-link" href="{{route('admin.categories.create')}}">Ajouter</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.accreditations.index')}}">Accrédations en attente</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.accreditation.active')}}">Accrédations actives</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.accreditation.archived')}}">Accrédations expirées</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_stade')}}">Liste par stade</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_media')}}">Liste par Type Média</a></li>
+                     <!--<li class="pc-item"><a class="pc-link" href="#">Ajouter</a></li>-->
                   </ul>
                </li>
 
                <li class="pc-item pc-hasmenu">
-                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">info</i></span><span class="pc-mtext">Actualités</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">play_arrow</i></span><span class="pc-mtext">Média</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                   <ul class="pc-submenu">
-                     <li class="pc-item"><a class="pc-link" href="{{route('posts.index')}}">Liste</a></li>
-                     <li class="pc-item"><a class="pc-link" href="{{route('posts.create')}}">Ajouter</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.medias.index')}}">Liste</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.pending_media')}}">En attente</a></li>
+                     <!--<li class="pc-item"><a class="pc-link" href="{{route('admin.medias.create')}}">Ajouter</a></li>-->
                   </ul>
                </li>
 
@@ -164,32 +171,61 @@
                </li>
 
                <li class="pc-item pc-hasmenu">
-                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">content_copy</i></span><span class="pc-mtext">Accréditations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">info</i></span><span class="pc-mtext">Actualités</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                   <ul class="pc-submenu">
-                     <li class="pc-item"><a class="pc-link" href="{{route('admin.accreditations.index')}}">Liste générale</a></li>
-                     <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_stade')}}">Liste par stade</a></li>
-                     <li class="pc-item"><a class="pc-link" href="{{route('admin.inscription_media')}}">Liste par Type Média</a></li>
-                     <!--<li class="pc-item"><a class="pc-link" href="#">Ajouter</a></li>-->
+                     <li class="pc-item"><a class="pc-link" href="{{route('posts.index')}}">Liste</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('posts.create')}}">Ajouter</a></li>
                   </ul>
                </li>
-                 
-                 <li class="pc-item pc-hasmenu">
-                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">account_circle</i></span><span class="pc-mtext">Administrateurs</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                    <ul class="pc-submenu">
-                       <li class="pc-item"><a class="pc-link" href="{{route('admin.administrators.index')}}">Liste</a></li>
-                       <li class="pc-item"><a class="pc-link" href="{{route('admin.administrators.create')}}">Ajouter</a></li>
-                    </ul>
-                 </li>
-                 
-                 <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">play_arrow</i></span><span class="pc-mtext">Média</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.medias.index')}}">Liste</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.pending_media')}}">En attente</a></li>
-                        <!--<li class="pc-item"><a class="pc-link" href="{{route('admin.medias.create')}}">Ajouter</a></li>-->
-                     </ul>
-                  </li>
 
+               <li class="pc-item pc-hasmenu">
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">star_border</i></span><span class="pc-mtext">Journées</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <ul class="pc-submenu">
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.journees.index')}}">Liste</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.journees.create')}}">Ajouter</a></li>
+                  </ul>
+               </li>
+
+               <li class="pc-item pc-hasmenu">
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">outlined_flag</i></span><span class="pc-mtext">Stades</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <ul class="pc-submenu">
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.stades.index')}}">Liste</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.stades.create')}}">Ajouter</a></li>
+                  </ul>
+               </li>
+
+               <li class="pc-item pc-hasmenu">
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">account_circle</i></span><span class="pc-mtext">Administrateurs</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <ul class="pc-submenu">
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.administrators.index')}}">Liste</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.administrators.create')}}">Ajouter</a></li>
+                  </ul>
+               </li>
+
+               <li class="pc-item pc-hasmenu">
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">place</i></span><span class="pc-mtext">Villes</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <ul class="pc-submenu">
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.villes.index')}}">Liste</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.villes.create')}}">Ajouter</a></li>
+                  </ul>
+               </li>
+
+               <li class="pc-item pc-hasmenu">
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">edit</i></span><span class="pc-mtext">Catégories</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <ul class="pc-submenu">
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.categories.index')}}">Liste</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.categories.create')}}">Ajouter</a></li>
+                  </ul>
+               </li>
+
+                 <li class="pc-item pc-hasmenu">
+                  <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">play_circle_filled</i></span><span class="pc-mtext">Type Média</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                  <ul class="pc-submenu">
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.typemedias.index')}}">Liste</a></li>
+                     <li class="pc-item"><a class="pc-link" href="{{route('admin.typemedias.create')}}">Ajouter</a></li>
+                  </ul>
+               </li>
+      
                  <li class="pc-item pc-hasmenu">
                   <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">topic</i></span><span class="pc-mtext">Type Accrédations</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                   <ul class="pc-submenu">
@@ -197,38 +233,7 @@
                      <li class="pc-item"><a class="pc-link" href="{{route('admin.typeaccreditations.create')}}">Ajouter</a></li>
                   </ul>
                </li>
-
-                 <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">play_circle_filled</i></span><span class="pc-mtext">Type Média</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.typemedias.index')}}">Liste</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.typemedias.create')}}">Ajouter</a></li>
-                     </ul>
-                  </li>
-
-                  <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">place</i></span><span class="pc-mtext">Villes</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.villes.index')}}">Liste</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.villes.create')}}">Ajouter</a></li>
-                     </ul>
-                  </li>
-
-                  <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">star_border</i></span><span class="pc-mtext">Journées</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.journees.index')}}">Liste</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.journees.create')}}">Ajouter</a></li>
-                     </ul>
-                  </li>
-
-                  <li class="pc-item pc-hasmenu">
-                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">outlined_flag</i></span><span class="pc-mtext">Stades</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.stades.index')}}">Liste</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{route('admin.stades.create')}}">Ajouter</a></li>
-                     </ul>
-                  </li>
+                  
                  @endcan
                 </ul>
             </div>

@@ -35,6 +35,7 @@ class CreateAccreditationsTable extends Migration
             $table->foreign('journee_id')->references('id')->on('journees');
             $table->boolean('status')->default(0);
             $table->date('date_match')->nullable();
+            $table->date('activated_at')->nullable();
             $table->timestamps();
         });
     }

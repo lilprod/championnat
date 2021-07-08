@@ -8,11 +8,11 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Accréditations</h5>
+                    <h5 class="m-b-10">Mes accréditations actives</h5>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="#!">Accréditations valides</a></li>
+                    <li class="breadcrumb-item"><a href="#!">Accréditations actives</a></li>
                     <li class="breadcrumb-item">Liste</li>
                 </ul>
             </div>
@@ -28,7 +28,7 @@
         @include('inc.messages')
         <div class="card">
             <div class="card-header">
-                <h5> Liste de mes accréditations valides </h5>
+                <h5> Liste de mes accréditations actives </h5>
             </div>
             <div class="card-body">
                 <div class="row align-items-center m-l-0">

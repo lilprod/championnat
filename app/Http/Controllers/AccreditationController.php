@@ -33,6 +33,14 @@ class AccreditationController extends Controller
     public function pending()
     {
         //Accreditations en attente
+        $date = Carbon::now()->toDateString();
+
+        $accreditations = Accreditation::where('user_id', auth()->user()->id)
+                                        ->where('date_match', '>', $date)
+                                        ->where('status', 0)
+                                        ->get();
+
+        return view('accreditations.pending', compact('accreditations'));
     }
 
     /**
@@ -48,6 +56,7 @@ class AccreditationController extends Controller
 
         $accreditations = Accreditation::where('user_id', auth()->user()->id)
                                         ->where('date_match', '>', $date)
+                                       // ->where('status', 1)
                                         ->get();
 
         return view('accreditations.index', compact('accreditations'));
@@ -213,9 +222,9 @@ class AccreditationController extends Controller
 
                     $accreditation->save();
 
-                    $event_final = Evenement::where('stade_id', $request->input('stade_id'))->first();
+                    //$event_final = Evenement::where('stade_id', $request->input('stade_id'))->first();
 
-                    $event_final->left_place = $event_final->left_place - 1 ;
+                    //$event_final->left_place = $event_final->left_place - 1 ;
 
                     // $mediaFinal = Media::where('user_id', auth()->user()->id)->first();
                     // $mediaFinal->name = $request->input('name');
@@ -269,12 +278,12 @@ class AccreditationController extends Controller
                     $agent->save();
                     $event_final->save();
 
-                    Mail::to($media->email)->send(new SendUserMail($accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, $accreditation->evenement->date_match, $accreditation->evenement->title));
+                    //Mail::to($media->email)->send(new SendUserMail($accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, $accreditation->evenement->date_match, $accreditation->evenement->title));
 
-                    Mail::to('ftf.accreditation@gmail.com')->send(new SendAdminMail($media->type->title, $media->nom_media, $media->phone_number, $media->email, $accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, Carbon::parse($accreditation->evenement->date_match)->format('d/m/Y'), $accreditation->evenement->title, $accreditation->evenement->left_place, $accreditation->evenement->quota));
+                    //Mail::to('ftf.accreditation@gmail.com')->send(new SendAdminMail($media->type->title, $media->nom_media, $media->phone_number, $media->email, $accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, Carbon::parse($accreditation->evenement->date_match)->format('d/m/Y'), $accreditation->evenement->title, $accreditation->evenement->left_place, $accreditation->evenement->quota));
 
                     //Redirect to the accredition view and display message
-                    return redirect()->route('media.accreditations.index')
+                    return redirect()->route('media.accreditation_pending')
                     ->with('success', 'Accreditation enregistrée avec succès.');
 
                 }else{
@@ -355,18 +364,18 @@ class AccreditationController extends Controller
 
                     $accreditation->save();
 
-                    $event_final = Evenement::where('stade_id', $request->input('stade_id'))->first();
+                    // $event_final = Evenement::where('stade_id', $request->input('stade_id'))->first();
 
-                    $event_final->left_place = $event_final->left_place - 1 ;
+                    // $event_final->left_place = $event_final->left_place - 1 ;
 
-                    $event_final->save();
+                    // $event_final->save();
 
-                    Mail::to($media->email)->send(new SendUserMail($accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, $accreditation->evenement->date_match, $accreditation->evenement->title));
+                    // Mail::to($media->email)->send(new SendUserMail($accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, $accreditation->evenement->date_match, $accreditation->evenement->title));
 
-                    Mail::to('ftf.accreditation@gmail.com')->send(new SendAdminMail($media->type->title, $media->nom_media, $media->phone_number, $media->email, $accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, Carbon::parse($accreditation->evenement->date_match)->format('d/m/Y'), $accreditation->evenement->title, $accreditation->evenement->left_place, $accreditation->evenement->quota));
+                    // Mail::to('ftf.accreditation@gmail.com')->send(new SendAdminMail($media->type->title, $media->nom_media, $media->phone_number, $media->email, $accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, Carbon::parse($accreditation->evenement->date_match)->format('d/m/Y'), $accreditation->evenement->title, $accreditation->evenement->left_place, $accreditation->evenement->quota));
 
                     //Redirect to the accredition view and display message
-                    return redirect()->route('media.accreditations.index')
+                    return redirect()->route('media.accreditation_pending')
                     ->with('success', 'Accreditation enregistrée avec succès.');
 
                 }else{
@@ -483,7 +492,7 @@ class AccreditationController extends Controller
             //Mail::to('ftf.accreditation@gmail.com')->send(new SendAdminMail($media->type->title, $media->nom_media, $media->phone_number, $media->email, $accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, Carbon::parse($accreditation->evenement->date_match)->format('d/m/Y'), $accreditation->evenement->title, $accreditation->evenement->left_place, $accreditation->evenement->quota));
 
 
-            return redirect()->route('media.accreditations.index')
+            return redirect()->route('media.accreditation_pending')
                     ->with('success', 'Accreditation mise à jour avec succès.');
                             
         }else{
@@ -555,18 +564,18 @@ class AccreditationController extends Controller
 
                     // Update the new event place
 
-                    $event_final = Evenement::where('stade_id', $request->input('stade_id'))->first();
+                    //$event_final = Evenement::where('stade_id', $request->input('stade_id'))->first();
 
-                    $event_final->left_place = $event_final->left_place - 1 ;
+                    //$event_final->left_place = $event_final->left_place - 1 ;
 
-                    $event_final->save();
+                    //$event_final->save();
 
-                    Mail::to($media->email)->send(new SendUserMail($new_accreditation->ville->title, $new_accreditation->stade->title, $new_accreditation->journee->title, $new_accreditation->evenement->date_match, $new_accreditation->evenement->title));
+                    //Mail::to($media->email)->send(new SendUserMail($new_accreditation->ville->title, $new_accreditation->stade->title, $new_accreditation->journee->title, $new_accreditation->evenement->date_match, $new_accreditation->evenement->title));
 
-                    Mail::to('ftf.accreditation@gmail.com')->send(new SendAdminMail($media->type->title, $media->nom_media, $media->phone_number, $media->email, $new_accreditation->ville->title, $new_accreditation->stade->title, $new_accreditation->journee->title, Carbon::parse($new_accreditation->evenement->date_match)->format('d/m/Y'), $new_accreditation->evenement->title, $new_accreditation->evenement->left_place, $new_accreditation->evenement->quota));
+                    //Mail::to('ftf.accreditation@gmail.com')->send(new SendAdminMail($media->type->title, $media->nom_media, $media->phone_number, $media->email, $new_accreditation->ville->title, $new_accreditation->stade->title, $new_accreditation->journee->title, Carbon::parse($new_accreditation->evenement->date_match)->format('d/m/Y'), $new_accreditation->evenement->title, $new_accreditation->evenement->left_place, $new_accreditation->evenement->quota));
 
                     //Redirect to the accredition view and display message
-                    return redirect()->route('media.accreditations.index')
+                    return redirect()->route('media.accreditation_pending')
                     ->with('success', 'Accreditation mise à jour avec succès.');
 
                 }else{
@@ -720,7 +729,7 @@ class AccreditationController extends Controller
             //Mail::to('ftf.accreditation@gmail.com')->send(new SendAdminMail($media->type->title, $media->nom_media, $media->phone_number, $media->email, $accreditation->ville->title, $accreditation->stade->title, $accreditation->journee->title, Carbon::parse($accreditation->evenement->date_match)->format('d/m/Y'), $accreditation->evenement->title, $accreditation->evenement->left_place, $accreditation->evenement->quota));
 
             //Redirect to the accredition view and display message
-            return redirect()->route('media.accreditations.index')
+            return redirect()->route('media.accreditation_pending')
             ->with('success', 'Accredition enregistrée avec succès.');
 
         }else{
@@ -803,16 +812,16 @@ class AccreditationController extends Controller
                     $accreditation->delete();
 
                     // Update the new event place
-                    $event_final = Evenement::where('stade_id', $request->input('stade_id'))->first();
-                    $event_final->left_place = $event_final->left_place - 1 ;
-                    $event_final->save();
+                    //$event_final = Evenement::where('stade_id', $request->input('stade_id'))->first();
+                    //$event_final->left_place = $event_final->left_place - 1 ;
+                    //$event_final->save();
 
-                    Mail::to($media->email)->send(new SendUserMail($new_accreditation->ville->title, $new_accreditation->stade->title, $new_accreditation->journee->title, $new_accreditation->evenement->date_match, $new_accreditation->evenement->title));
+                    //Mail::to($media->email)->send(new SendUserMail($new_accreditation->ville->title, $new_accreditation->stade->title, $new_accreditation->journee->title, $new_accreditation->evenement->date_match, $new_accreditation->evenement->title));
 
-                    Mail::to('ftf.accreditation@gmail.com')->send(new SendAdminMail($media->type->title, $media->nom_media, $media->phone_number, $media->email, $new_accreditation->ville->title, $new_accreditation->stade->title, $new_accreditation->journee->title, Carbon::parse($new_accreditation->evenement->date_match)->format('d/m/Y'), $new_accreditation->evenement->title, $new_accreditation->evenement->left_place, $new_accreditation->evenement->quota));
+                    //Mail::to('ftf.accreditation@gmail.com')->send(new SendAdminMail($media->type->title, $media->nom_media, $media->phone_number, $media->email, $new_accreditation->ville->title, $new_accreditation->stade->title, $new_accreditation->journee->title, Carbon::parse($new_accreditation->evenement->date_match)->format('d/m/Y'), $new_accreditation->evenement->title, $new_accreditation->evenement->left_place, $new_accreditation->evenement->quota));
 
                     //Redirect to the accredition view and display message
-                    return redirect()->route('media.accreditations.index')
+                    return redirect()->route('media.accreditation_pending')
                     ->with('success', 'Accreditation mise à jour avec succès.');
 
                 }else{
